@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>home</title>
+</head>
+
+<body>
+
+    <header>
+        <nav id="navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-pizza-slice"></i>
+                Pizzaria Taurus
+            </a>
+
+            <ul id="nav_list">
+                <li class="nav_item active">
+                    <a href="#home">Home</a>
+                </li>
+                <li class="nav_item">
+                    <a href="#menu">Cardapio</a>
+                </li>
+                <li class="nav_item">
+                    <a href="#avalia">Avaliações</a>
+                </li>
+            </ul>
+
+            <div id="nav_actions">
+                <button id="theme-toggle">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <main id="content">
+        <section id="home">
+            <div class="blob"></div>
+            <div id="cta">
+                <h1 id="titulo">
+                    Noites tranquilas, pizzas incríveis.
+                    O <span>SABOR</span> vai até <span>você</span>
+                </h1>
+
+                <p id="description">
+                    Na Pizzaria do Fabio, cada pizza é preparada com ingredientes selecionados, massa artesanal e muito
+                    sabor.
+                    Um ambiente acolhedor e perfeito para reunir amigos e família enquanto aproveita as melhores pizzas
+                    da cidade. 🍕
+                </p>
+
+                <div id="cta_buttons">
+                    <a href="#" class="btn-default">ver cardápio</a>
+                    <a href="tel:+55 81 99770-8693" id="botao_telefone">
+                        <button class="btn-default">
+                            <i class="fa-solid fa-phone"></i>
+                            (81) 99770-8693
+                        </button>
+                    </a>
+                </div>
+
+                <div id="botao-redes-sociais">
+                    <a href="">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/fabio_barbosa8p/" target="_blank">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div id="fotoseila">
+                <img src="pizza.png" alt="Pizza">
+            </div>
+        </section>
+    </main>
+    <script>
+        const button = document.getElementById('theme-toggle');
+        const icon = button.querySelector('i');
+
+        button.addEventListener('click', () => {
+
+            icon.style.transform = 'rotate(180deg) scale(0.5)';
+            icon.style.opacity = '0';
+
+            setTimeout(() => {
+
+                document.body.classList.toggle('dark');
+
+                if (document.body.classList.contains('dark')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+
+                icon.style.transform = 'rotate(0deg) scale(1)';
+                icon.style.opacity = '1';
+
+            }, 150);
+
+        });
+    </script>
+</body>
+
+</html>
