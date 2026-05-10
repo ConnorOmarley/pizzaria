@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 
 }
 
@@ -14,7 +14,7 @@ body{
     background-image:
     linear-gradient(rgba(255,248,235,0.72),
     rgba(255,248,235,0.72)),
-    url('backfundo.jpg');
+    url('../img/backfundo.jpg');
 
     background-size: cover;
     background-position: center;
@@ -350,7 +350,7 @@ body.dark{
     background-image:
     linear-gradient(rgba(0,0,0,0.75),
     rgba(0,0,0,0.75)),
-    url('backfundo.jpg');
+    url('../img/backfundo.jpg');
 
     background-size: cover;
     background-position: center;

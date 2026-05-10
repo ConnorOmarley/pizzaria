@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>home</title>
 </head>
@@ -75,38 +75,12 @@
                 </div>
             </div>
             <div id="fotoseila">
-                <img src="pizza.png" alt="Pizza">
+                <img src="assets/img/pizza.png" alt="Pizza">
             </div>
         </section>
     </main>
-    <script>
-        const button = document.getElementById('theme-toggle');
-        const icon = button.querySelector('i');
 
-        button.addEventListener('click', () => {
-
-            icon.style.transform = 'rotate(180deg) scale(0.5)';
-            icon.style.opacity = '0';
-
-            setTimeout(() => {
-
-                document.body.classList.toggle('dark');
-
-                if (document.body.classList.contains('dark')) {
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                } else {
-                    icon.classList.remove('fa-sun');
-                    icon.classList.add('fa-moon');
-                }
-
-                icon.style.transform = 'rotate(0deg) scale(1)';
-                icon.style.opacity = '1';
-
-            }, 150);
-
-        });
-    </script>
+<script src="assets/js/ms.js"></script>
 </body>
 
 </html>
