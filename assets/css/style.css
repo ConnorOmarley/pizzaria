@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* IMPORTAÇÃO DA FONTE */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+/* RESET GERAL */
 *{
     font-family: "Poppins", sans-serif;
     margin: 0;
@@ -8,364 +10,622 @@
     outline: none;
     text-decoration: none;
     border: none;
-    text-transform: capitalize;
-    transition: all 0.2s linear;
+    transition: .2s linear;
 }
 
-html {
+/* CONFIGURAÇÃO GLOBAL */
+html{
     font-size: 62.5%;
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
-.btn {
+/* BOTÃO PADRÃO */
+.btn{
     display: inline-block;
-    font-size: 1.7rem;
-    color: red;
-    background: none;
     margin-top: 1rem;
     padding: .8rem 3rem;
-    border: 1px solid red;
+    border: .1rem solid red;
     border-radius: .5rem;
     cursor: pointer;
+    background: none;
+    color: red;
+    font-size: 1.7rem;
 }
 
-.btn:hover {
+.btn:hover{
     background: red;
     color: #fff;
 }
 
-/* INICIO DO CABEÇALHO DO SITE */
+/* CONFIGURAÇÃO DAS SEÇÕES */
+section{
+    padding: 3rem 7%;
+}
 
-.topo-site {
-    display: flex;
+/* TITULOS */
+.titulo{
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 3rem;
+    color: #130f40;
+    margin-bottom: 3rem;
+}
+
+.titulo span{
+    color: red;
+}
+
+/* CABEÇALHO */
+.topo-site{
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+
+    display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 2rem 9%;
-    z-index: 1000;
     background: red;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
 }
 
-.topo-site .logo {
+/* LOGO */
+.topo-site .logo{
     font-size: 2.5rem;
-    color: #fff;
     font-weight: bolder;
-}
-
-.topo-site .logo i {
-    color: yellow;
-    padding-right: .5rem;
-    rotate: 175deg;
-}
-
-.topo-site .menu-site a {
     color: #fff;
-    font-size: 1.7rem;
+}
+
+.topo-site .logo i{
+    color: yellow;
+    transform: rotate(175deg);
+}
+
+/* MENU */
+.topo-site .menu-site a{
+    color: #fff;
     margin: 0 1rem;
+    font-size: 1.7rem;
 }
 
-.topo-site .menu-site a:hover {
+.topo-site .menu-site a:hover{
     color: yellow;
 }
 
-.topo-site .icons div {
-    color: #fff;
+/* ICONES */
+.topo-site .icons div{
     font-size: 2.5rem;
     margin-left: 1.7rem;
+    color: #fff;
     cursor: pointer;
 }
 
-.topo-site .icons div:hover {
+.topo-site .icons div:hover{
     color: yellow;
 }
 
-#menu {
+/* MENU MOBILE */
+#menu{
     display: none;
 }
 
-.topo-site .carrinho {
-    width: 35rem;
-    background: #fff;
-    border-radius: .5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+/* CARRINHO */
+.topo-site .carrinho{
     position: absolute;
     top: 115%;
     right: -105%;
+
+    width: 35rem;
     padding: 2rem;
+
+    background: #fff;
+    border-radius: .5rem;
+
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
 }
 
-.topo-site .carrinho.active {
+.topo-site .carrinho.active{
     right: 2rem;
-    transition: .4s linear;
 }
 
-.topo-site .carrinho .box {
+.topo-site .carrinho .box{
     position: relative;
     display: flex;
-    margin-bottom: 1.5rem;
-    gap: 1.5rem;
     align-items: center;
+    gap: 1.5rem;
+
+    margin-bottom: 1.5rem;
 }
 
-.topo-site .carrinho .box .fa-times {
-    position: absolute;
-    top: 50%;
-    right: 2rem;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    color: #777;
-    cursor: pointer;
-}
-
-.topo-site .carrinho .box .fa-times:hover {
-    color: red;
-}
-
-.topo-site .carrinho .box img {
+.topo-site .carrinho .box img{
     height: 10rem;
 }
 
-.topo-site .carrinho .box .content h3 {
+.topo-site .carrinho .box .fa-times{
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+
+    transform: translateY(-50%);
+    cursor: pointer;
+
+    color: #777;
+    font-size: 2rem;
+}
+
+.topo-site .carrinho .box .fa-times:hover{
+    color: red;
+}
+
+.topo-site .carrinho .content h3{
     font-size: 1.7rem;
-    padding-bottom: .5rem;
     color: #130f40;
 }
 
-.topo-site .carrinho .box .content span {
-    font-size: 1.7rem;
+.topo-site .carrinho .content span{
+    font-size: 1.6rem;
     color: #777;
 }
 
-.topo-site .carrinho .box .content span.multiplica {
+.topo-site .carrinho .content .multiplica{
     margin: 0 .5rem;
-
 }
 
-.topo-site .carrinho .total {
+.topo-site .carrinho .total{
+    text-align: center;
     font-size: 2.2rem;
     color: #130f40;
-    text-align: center;
 }
 
-.topo-site .carrinho .btn {
+.topo-site .carrinho .btn{
     width: 100%;
     text-align: center;
 }
 
-.topo-site .login-form {
+/* LOGIN */
+.topo-site .login-form{
     position: absolute;
     top: 115%;
     right: -105%;
-    background: #fff;
-    box-shadow: rgba(0, 0, 0, 0.1);
-    border-radius: .5rem;
+
     width: 35rem;
     padding: 2rem;
+
+    background: #fff;
+    border-radius: .5rem;
+
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
 }
 
-.topo-site .login-form.active {
+.topo-site .login-form.active{
     right: 2rem;
-    transition: .4s linear;
 }
 
-.topo-site .login-form h3 {
+.topo-site .login-form h3{
+    text-align: center;
     font-size: 2.2rem;
     color: #130f40;
-    text-transform: uppercase;
-    margin-bottom: .7rem;
-    text-align: center;
+    margin-bottom: 1rem;
 }
 
-.topo-site .login-form .box {
+.topo-site .login-form .box{
+    width: 100%;
     margin: .7rem 0;
     padding: 1rem 1.2rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    text-transform: none;
-    color: #130f40;
+
+    border: .1rem solid rgba(0,0,0,.1);
+    border-radius: .5rem;
+
+    font-size: 1.6rem;
 }
 
-.topo-site .login-form .lembrar-senha {
+.topo-site .login-form .lembrar-senha{
     display: flex;
     align-items: center;
     gap: .5rem;
+
     margin: .7rem 0;
 }
 
-.topo-site .login-form .lembrar-senha label {
+.topo-site .login-form .lembrar-senha label{
     font-size: 1.5rem;
-    color: #fff;
+    color: #130f40;
     cursor: pointer;
 }
 
-.topo-site .login-form .btn {
+.topo-site .login-form .btn{
     width: 100%;
-    text-align: center;
-    margin: 1rem 0;
 }
 
-.msflix-destaque {
+/* SLIDER */
+.msflix-destaque{
     padding: 0;
 }
 
-.msflix-destaque .slide {
+.msflix-destaque .slide{
+    min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    background-size: cover !important;
-    background-position: center !important;
-
 }
 
-.msflix-destaque .slide .content {
-    display: none;
-    width: 60rem;
+.msflix-destaque .slide .content{
     text-align: center;
+    width: 60rem;
 }
 
-.msflix-destaque .slide .content h3 {
+.msflix-destaque .slide .content h3{
     font-size: 6rem;
-    line-height: 1.3;
     color: #fff;
-    padding: 2rem 0;
-    animation: sliderMaykon 1s ease forwards;
+    line-height: 1.3;
 }
 
-.msflix-destaque .slide .content .span {
+.msflix-destaque .slide .content h3 span{
     color: yellow;
 }
 
-
-.msflix-destaque .slide .content .btn {
-    background-color: red;
+.msflix-destaque .slide .btn{
+    background: red;
     color: #fff;
 }
 
-.msflix-destaque .slide .content .btn:hover {
-    background-color: yellow;
+.msflix-destaque .slide .btn:hover{
+    background: yellow;
     color: #130f40;
-    border: none;
-    animation: sliderReveal 1s ease forwards;
 }
 
-.msflix-destaque .swiper-slide-active .content {
+/* BOTÕES SLIDER */
+.swiper-button-next,
+.swiper-button-prev{
+    color: red;
+}
+
+/* DESTAQUES */
+.destaque .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 2rem;
+}
+
+.destaque .box{
+    overflow: hidden;
+    background: red;
+    text-align: center;
+}
+
+.destaque .box .msimg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.destaque .box .content{
+    padding: 2rem;
+}
+
+.destaque .box .content h3{
+    color: #fff;
+    font-size: 2.5rem;
+}
+
+/* COMO FUNCIONA */
+.como-funciona .box-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.como-funciona .box{
+    flex: 1 1 25rem;
+    text-align: center;
+}
+
+.como-funciona .box img{
+    width: 17rem;
+}
+
+.como-funciona .box h3{
+    font-size: 2rem;
+    color: #130f40;
+    margin-top: 1rem;
+}
+
+/* LOJA */
+
+.loja .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 2.5rem;
+}
+
+.loja .box-container .box {
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    padding: 0 2.5rem;
+}
+
+.loja .box-container .box img {
+    height: 29rem;
+    transition: .4s linear;
+}
+
+.loja .box-container .box:hover img {
+    transform: scale(1.1);
+}
+
+.loja .box-container .box h3 {
+    color: #130f40;
+    font-size: 2.5rem;
+    line-height: 1.8;
+}
+
+.loja .box-container .box p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.loja .box-container .box .estrelas {
+    padding: 1rem 0;
+}
+
+.loja .box-container .box .estrelas i {
+    font-size: 1.7rem;
+    color: gold;
+}
+
+.loja .box-container .box .loja-valor {
+    font-size: 2.5rem;
+    font-weight: bolder;
+    margin-right: 1rem;
+    color: #130f40;
+}
+
+.loja .box-container .box .loja-valor span {
+    color: red;
+    font-size: 1.5rem;
+    font-weight: lighter;
+    text-decoration: line-through;
+}
+
+/* EMPRESA */
+.empresa {
+    background-color: red;
+}
+
+.empresa .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    background: red;
+    align-items: center;
+}
+
+.empresa .row .empresa-img {
+    flex: 1 1 32rem;
+}
+
+.empresa .row .empresa-img img {
+    width: 100%;
+    box-shadow: 0 5rem 1rem rgba(0, 0, 0, .1);
+}
+
+.empresa .row .content {
+    flex: 1 1 50rem;
+}
+
+.empresa .row .content h3 {
+    font-size: 3.5rem;
+    color: #fff;
+}
+
+.empresa .row .content h3 span {
+    color: yellow;
+}
+
+.empresa .row .content p {
+    font-size: 1.6rem;
+    color: #fff;
+    padding: 2rem 0;
+    line-height: 2;
+}
+
+.empresa .btn {
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.empresa .btn:hover {
+    background: #fffb00;
+    color: #130f40;
+    border: 1px solid #130f40;
+}
+
+/* BLOG */
+
+.blogs h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+}
+
+.blogs h1 span {
+    color: red;
+}
+
+.blogs .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 4rem;
+}
+
+.blogs .box-container .box {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: .5rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+}
+
+.blogs .box-container .box img {
+    width: 100%;
+    height: 25rem;
+    border-radius: .5rem;
+    object-fit: cover;
+}
+
+.blogs .box-container .box .icons {
+    display: inline-block;
+    top: -2rem;
+    background: red;
+    padding: 1rem;
+    border-radius: .5rem;
+    position: relative;
+}
+
+.blogs .box-container .box .icons a {
+    color: #fff;
+    font-size: 1.4rem;
+    margin: 0 1rem;
+}
+
+.blogs .box-container .box .icons a:hover {
+    color: gold;
+}
+
+.blogs .box-container .box .icons a i {
+    color: #130f40;
+    padding-right: .5rem;
+
+}
+
+.blogs .box-container .box h3 {
+    font-size: 2rem;
+    color: #130f40;
+}
+
+.blogs .box-container .box p {
+    color: #777;
+    font-size: 1.4rem;
+    padding: 1rem 0;
+    line-height: 2;
+}
+
+.blogs .box-container .box:hover img {
+    transform: scale(1.1);
+}
+
+/* RESPONSIVIDADE */
+@media(max-width: 991px){
+
+    html{
+        font-size: 55%;
+    }
+
+    section{
+        padding: 3rem 2rem;
+    }
+
+    .topo-site{
+        padding: 2rem;
+    }
+
+}
+
+@media(max-width: 768px){
+
+    #menu{
+        display: inline-block;
+    }
+
+    .topo-site .menu-site{
+        position: absolute;
+        top: 110%;
+        right: -110%;
+
+        width: 30rem;
+        background: #fff;
+
+        border-radius: .5rem;
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+    }
+
+    .topo-site .menu-site.active{
+        right: 2rem;
+    }
+
+    .topo-site .menu-site a{
+        display: block;
+        margin: 2rem;
+        color: #000;
+        font-size: 2rem;
+    }
+
+    .msflix-destaque .slide .content h3{
+        font-size: 4rem;
+    }
+
+}
+
+@media(max-width: 450px){
+
+    html{
+        font-size: 50%;
+    }
+
+    .msflix-destaque .slide .content h3{
+        font-size: 3.5rem;
+    }
+
+}
+
+/* INICIO EFEITOS SWIPER */
+
+.msflix-destaque .slide .content{
+    display: none;
+}
+
+.msflix-destaque .swiper-slide-active .content{
     display: inline-block;
 }
 
-.msflix-destaque .swiper-slide-active {
+.msflix-destaque .swiper-slide-active{
     animation: msflixScale 4s linear forwards;
 }
 
+.msflix-destaque .slide .content h3{
+    animation: sliderMaykon 1s ease forwards;
+}
+
 @keyframes sliderMaykon {
-    0% {
+
+    0%{
         transform: translateY(30px);
         opacity: 0;
     }
 
-    100% {
+    100%{
         transform: translateY(0px);
         opacity: 1;
     }
+
 }
 
 @keyframes msflixScale {
-    0% {
+
+    0%{
         transform: scale(1);
     }
 
-    100% {
+    100%{
         transform: scale(1.15);
     }
+
 }
 
-.swiper-button-prev, .swiper-button-next {
-    height: 4.5rem;
-    width: 4.5rem;
-    line-height: 4.5rem;
-    margin-left: 1.5rem;
-    color: red;
-    border: .1rem solid red;
-    transform: translateY(-50%) rotate(45deg);
-}
-
-.swiper-button-prev::after, .swiper-button-next::after {
-    font-size: 1.5rem;
-    transform: rotate(-45deg);
-}
-
-.swiper-button-prev:hover, .swiper-button-next:hover {
-    color: #fff;
-    background: red;
-}
-
-@media(max-width: 991px) {
-    html {
-        font-size: 55%;
-    }
-    section {
-        padding: 3rem;
-    }
-
-    .topo-site {
-        padding: 2rem;
-    }
-}
-
-@media(max-width: 768px) {
-    html {
-        .topo-site .icons #menu {
-            display: inline-block;
-        }
-    }
-
-    .topo-site .menu-site {
-        position: absolute;
-        top: 110%;
-        right: 110%;
-        width: 30rem;
-        background-color: #fff;
-        border-radius: .5rem;
-        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
-    }
-    .topo-site .menu-site.active {
-        right: 2rem;
-        transition: .4s linear;
-    }
-
-    .topo-site .menu-site a {
-        display: block;
-        font-size: 2rem;
-        margin: 2rem 2.5rem;
-    }
-
-    .msflix-destaque .slide .content h3 {
-        font-size: 4rem;
-    }
-
-    .topo-site .menu-site a {
-        color: #000;
-        border-bottom: 1px solid #000;
-        border-bottom-style: dotted;
-    }
-}
-
-@media(max-width: 450px) {
-    html {
-        font-size: 50%;
-    }
-
-    .msflix-destaque .slide .content h3 {
-        font-size: 3.5rem;
-    }
-
-    .topo-site .menu-site a {
-        color: #000;
-        border-bottom: 1px solid #000;
-        border-bottom-style: dotted;
-    }
-}
+/* FIM EFEITOS SWIPER */

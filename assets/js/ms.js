@@ -1,24 +1,55 @@
+/* INICIO VARIAVEIS DOS PAINEIS */
 let carrinhoPainel = document.querySelector('.carrinho');
 let loginPainel = document.querySelector('.login-form');
+let menuPainel = document.querySelector('.menu-site');
+/* FIM VARIAVEIS DOS PAINEIS */
 
+/* INICIO BOTÃO CARRINHO */
 document.querySelector('#cart').onclick = () => {
+
     carrinhoPainel.classList.toggle('active');
-    
-    loginPainel.classList.remove('active');
-};
 
+    loginPainel.classList.remove('active');
+    menuPainel.classList.remove('active');
+
+};
+/* FIM BOTÃO CARRINHO */
+
+/* INICIO BOTÃO LOGIN */
 document.querySelector('#login').onclick = () => {
-    loginPainel.classList.toggle('active');
-    carrinhoPainel.classList.remove('active');
-};
 
-window.onscroll = () => {
+    loginPainel.classList.toggle('active');
+
+    carrinhoPainel.classList.remove('active');
+    menuPainel.classList.remove('active');
+
+};
+/* FIM BOTÃO LOGIN */
+
+/* INICIO MENU MOBILE */
+document.querySelector('#menu').onclick = () => {
+
+    menuPainel.classList.toggle('active');
+
     carrinhoPainel.classList.remove('active');
     loginPainel.classList.remove('active');
-};
 
-const swiper = new Swiper(".homer-slider", {
-    
+};
+/* FIM MENU MOBILE */
+
+/* INICIO FECHAR PAINEIS AO ROLAR */
+window.onscroll = () => {
+
+    carrinhoPainel.classList.remove('active');
+    loginPainel.classList.remove('active');
+    menuPainel.classList.remove('active');
+
+};
+/* FIM FECHAR PAINEIS AO ROLAR */
+
+/* INICIO SWIPER SLIDER */
+const swiper = new Swiper(".home-slider", {
+
     loop: true,
     centeredSlides: true,
     grabCursor: true,
@@ -33,4 +64,6 @@ const swiper = new Swiper(".homer-slider", {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
     },
+
 });
+/* FIM SWIPER SLIDER */
