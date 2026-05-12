@@ -16,3 +16,21 @@ window.onscroll = () => {
     carrinhoPainel.classList.remove('active');
     loginPainel.classList.remove('active');
 };
+
+const swiper = new Swiper(".homer-slider", {
+    
+    loop: true,
+    centeredSlides: true,
+    grabCursor: true,
+    slidesPerView: 1,
+
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+});
