@@ -96,7 +96,7 @@
 /* PRATOS */
 /* ========================= */
 
-#pratos{
+#pratos-doces, #pratos-salgados{
     width: 100%;
 
     display: flex;
@@ -106,6 +106,17 @@
     flex-wrap: wrap;
 
     margin-top: 40px;
+}
+
+#menu h1{
+    text-align: center;
+    font-size: 40px;
+    margin: 80px 0 50px;
+    width: 100%;
+}
+
+#menu h1 span {
+    color: red;
 }
 
 /* CARD */
@@ -143,6 +154,22 @@
     transform:scale(1.03);
 }
 
+.pratos-doces .pratos-salgados{
+    position: relative;
+}
+
+.promo{
+    position: absolute;
+    background: #ff3b30;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    top: 20px;
+    right: 20px;
+}
+
 .titulo-prato{
     margin-top:18px;
     font-size:1.5rem;
@@ -163,7 +190,7 @@
     display:flex;
     align-items:center;
     gap:5px;
-    color:#ffb300;
+    color:gold;
     font-size:1rem;
 }
 
@@ -181,6 +208,13 @@
     color:#1d1d1d;
     font-size:1.4rem;
     font-weight:700;
+}
+
+.preco-prato span {
+    color: red;
+    font-size: 1.2rem;
+    font-weight: lighter;
+    text-decoration: line-through;
 }
 
 .preco-prato .btn-default{
@@ -214,6 +248,7 @@
 }
 
 #coração:hover{
-    color:#ff4d6d;
+    color:red;
     transform:scale(1.1);
 }
+
