@@ -520,6 +520,82 @@ section{
     transform: scale(1.1);
 }
 
+/*Rodapé*/
+.rodape{
+  background-color: #ff0000;
+  text-align: center;
+}
+
+.rodape .box-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 2rem;
+}
+
+.rodape .box-container .box h3{
+    font-size: 2.2rem;
+    text-transform: capitalize;
+    color: #fff;
+    padding: 1rem 0;
+}
+
+.rodape .box-container .box p{
+    font-size: 1.5rem;
+    color: #fff;
+    line-height: 2;
+    padding: 1rem 0;
+}
+
+.rodape .box-container .box redes-sociais {
+    margin-top: 1rem;
+}
+
+.rodape .box-container .box redes-sociais a{
+    color: #fff;
+    border: 1rem solid #fff;
+    border-radius: 10%;
+    width: 4.5rem;
+    height: 4.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+    margin-right: .3rem;
+}
+
+.rodape .box-container .box .redes-sociais a:hover{
+    background-color: #fffb00;
+    color: #130f40;
+    border: .1rem solid #130f40;
+}
+
+.rodape .box-container .box .link{
+    display: block;
+    font-size: 1.7rem;
+    line-height: 2;
+    padding: .5rem 0;
+    text-decoration: underline;
+    color: #fff;
+}
+
+.rodape .box-container .box .link:hover{
+    color: #fffb00;
+}
+
+.direitos {
+    text-align: center;
+    color: #fff;
+    font-size: 1.75rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    text-transform: capitalize;
+    border-top: 1px solid #fff;
+}
+
+.direitos span {
+    color: yellow;
+}
+
+
+
 /* RESPONSIVIDADE */
 @media(max-width: 991px){
 
@@ -627,5 +703,7 @@ section{
     }
 
 }
+
+
 
 /* FIM EFEITOS SWIPER */
