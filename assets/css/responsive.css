@@ -1,0 +1,118 @@
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media screen and (max-width: 1170px){
+
+    html, body{
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    #navbar{
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+    }
+
+    #nav_list{
+        display: none;
+    }
+
+    #home{
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        height: auto;
+        padding-top: 40px;
+        gap: 50px;
+    }
+
+    #cta{
+        width: 100%;
+        align-items: center;
+    }
+
+    #titulo{
+        font-size: 3rem;
+        line-height: 1.1;
+    }
+
+    #description{
+        max-width: 100%;
+        font-size: 1rem;
+    }
+
+    #cta_buttons{
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    #cta_buttons a,
+    #cta_buttons button{
+        width: 100%;
+        max-width: 320px;
+    }
+
+    #fotoseila{
+        width: 100%;
+    }
+
+    #fotoseila img{
+        width: 90%;
+        max-width: 420px;
+    }
+
+    .blob{
+        width: 350px;
+        height: 350px;
+        right: 50%;
+        top: auto;
+        bottom: 20px;
+        transform: translateX(50%);
+    }
+}
+
+@media screen and (max-width: 600px){
+
+    header{
+        padding: 10px 5%;
+    }
+
+    section{
+        padding: 0px 5%;
+    }
+
+    .logo{
+        font-size: 1.3rem;
+    }
+
+    .logo i{
+        font-size: 1.5rem;
+    }
+
+    #titulo{
+        font-size: 2.2rem;
+        letter-spacing: -1px;
+    }
+
+    #description{
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .btn-default{
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+
+    #botao-redes-sociais{
+        justify-content: center;
+    }
+
+    .blob{
+        width: 260px;
+        height: 260px;
+        opacity: 0.8;
+    }
+}

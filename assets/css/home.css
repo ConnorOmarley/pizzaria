@@ -1,0 +1,153 @@
+/* ========================= */
+/* HOME */
+/* ========================= */
+
+#home{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 80px;
+    overflow: hidden;
+    position: relative;
+
+    background-image:
+    linear-gradient(
+        rgba(255,248,235,0.72),
+        rgba(255,248,235,0.72)
+    ),
+    url('../img/backfundo.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#cta{
+    width: 46%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    z-index: 1;
+}
+
+#titulo{
+    font-size: 4.3rem;
+    line-height: 1;
+    color: #1a1a1a;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+#titulo span{
+    color: #e9a209;
+}
+
+#description{
+    color: #4e4e4e;
+    font-size: 1rem;
+    line-height: 1.9;
+    max-width: 580px;
+}
+
+#cta_buttons{
+    display: flex;
+    gap: 24px;
+}
+
+#botao_telefone{
+    text-decoration: none;
+}
+
+#botao_telefone button{
+    gap: 8px;
+}
+
+#botao-redes-sociais{
+    display: flex;
+    gap: 18px;
+}
+
+#botao-redes-sociais a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 40px;
+    background-color: white;
+    font-size: 1.25rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #1d1d1d;
+    box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+#botao-redes-sociais a:hover{
+    box-shadow: 0px 0px 12px 8px rgba(0,0,0,0.1);
+}
+
+#fotoseila{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    z-index: 2;
+}
+
+#fotoseila img{
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+}
+
+/* ========================= */
+/* BLOB */
+/* ========================= */
+
+.blob{
+    position: absolute;
+    right: 110px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 520px;
+    height: 520px;
+
+    background: linear-gradient(135deg, #d4a017, #4a2c12);
+
+    border-radius: 58% 42% 63% 37% / 41% 44% 56% 59%;
+
+    z-index: 0;
+
+    animation: blobAnim 8s ease-in-out infinite;
+}
+
+/* ========================= */
+/* WAVE DIVIDER */
+/* ========================= */
+
+.wave-divider{
+    position: absolute;
+
+    bottom: -2px;
+    left: 0;
+
+    width: 100%;
+
+    line-height: 0;
+
+    z-index: 5;
+}
+
+.wave-divider svg{
+    display: block;
+
+    width: 100%;
+    height: 120px;
+}
+
+.wave-divider path{
+    fill: #fff8eb;
+}

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css" />
     <title>home</title>
 </head>
 
@@ -20,15 +20,19 @@
             </a>
 
             <ul id="nav_list">
-                <li class="nav_item active">
+
+                <li class="nav_item active" data-section="home">
                     <a href="#home">Home</a>
                 </li>
-                <li class="nav_item">
-                    <a href="#menu">Cardapio</a>
+
+                <li class="nav_item" data-section="menu">
+                    <a href="#menu">Cardápio</a>
                 </li>
-                <li class="nav_item">
+
+                <li class="nav_item" data-section="avalia">
                     <a href="#avalia">Avaliações</a>
                 </li>
+
             </ul>
 
             <div id="nav_actions">
@@ -77,10 +81,182 @@
             <div id="fotoseila">
                 <img src="assets/img/pizza.png" alt="Pizza">
             </div>
+            
+            <div class="wave-divider">
+                <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                    <path
+                        d="M0,64L80,74.7C160,85,320,107,480,101.3C640,96,800,64,960,58.7C1120,53,1280,75,1360,85.3L1440,96L1440,120L0,120Z">
+                    </path>
+                </svg>
+            </div>
+        </section>
+        <section id="menu">
+
+            <h2>Cardápio</h2>
+            <p>Confira nossas deliciosas pizzas!</p>
+
+            <div class="slider">
+
+                <div class="slide active">
+                    <img src="assets/img/pizza1.jpg" alt="">
+                </div>
+
+                <div class="slide">
+                    <img src="assets/img/pizza2.jpg" alt="">
+                </div>
+
+                <div class="slide">
+                    <img src="assets/img/pizza3.jpg" alt="">
+                </div>
+
+                <div class="dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+
+            </div>
+
+            <div id="pratos">
+                <div class="prato">
+                    <div id="coração">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <img src="assets/img/p1.jpg" alt="">
+
+                    <h3 class="titulo-prato">
+                        Pizza de Chocolate com Morango
+                    </h3>
+
+                    <span id="descricao-prato">
+                        Uma deliciosa combinação de chocolate derretido e morangos frescos, perfeita para os amantes de
+                        doces.
+                    </span>
+
+                    <div class="prato-estrela">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+
+                    <div class="preco-prato">
+                        R$ 59,90
+                        <button class="btn-default">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            Comprar
+                        </button>
+                    </div>
+
+                </div>
+                <div class="prato">
+                    <div id="coração">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <img src="assets/img/p2.jpg" alt="">
+
+                    <h3 class="titulo-prato">
+                        Pizza de Banana com nutella
+                    </h3>
+
+                    <span id="descricao-prato">
+                        Uma deliciosa combinação de banana e nutella, perfeita para os amantes de doces.
+                    </span>
+
+                    <div class="prato-estrela">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+
+                    <div class="preco-prato">
+                        R$ 49,90
+                        <button class="btn-default">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            Comprar
+                        </button>
+                    </div>
+
+                </div>
+                <div class="prato">
+                    <div id="coração">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <img src="assets/img/p3.jpg" alt="">
+
+                    <h3 class="titulo-prato">
+                        Chocolate com biscoito picado
+                    </h3>
+
+                    <span id="descricao-prato">
+                        Uma deliciosa combinação de chocolate e biscoito picado, perfeita para os amantes de doces.
+                    </span>
+
+                    <div class="prato-estrela">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+
+                    <div class="preco-prato">
+                        R$ 29,90
+                        <button class="btn-default">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            Comprar
+                        </button>
+                    </div>
+
+                </div>
+                <div class="prato">
+                    <div id="coração">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <img src="assets/img/p4.jpg" alt="">
+
+                    <h3 class="titulo-prato">
+                        Pizza de Banana com Doce de Leite
+                    </h3>
+
+                    <span id="descricao-prato">
+                        Uma deliciosa combinação de banana e doce de leite, perfeita para os amantes de doces.
+                    </span>
+
+                    <div class="prato-estrela">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span>(500+)</span>
+                    </div>
+
+                    <div class="preco-prato">
+                        R$ 49,90
+                        <button class="btn-default">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            Comprar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
         </section>
     </main>
 
-<script src="assets/js/ms.js"></script>
+    <script src="assets/js/ms.js"></script>
 </body>
 
 </html>
