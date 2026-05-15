@@ -56,6 +56,33 @@ section{
     color: red;
 }
 
+/* TOPO PAGINAS*/
+
+.topo-pagina {
+    background: url(../img/topo-paginas-bg.png);
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding-top: 12rem;
+    padding-bottom: 8rem;
+}
+
+.topo-pagina h1 {
+    color: #fff;
+    font-size: 4rem;
+}
+
+.topo-pagina p {
+    padding-top: 1rem;
+    color: #fff;
+    font-size: 2rem;
+}
+
+.topo-pagina p a {
+    color: red;
+    padding-right: .5rem;
+}
+
 /* CABEÇALHO */
 .topo-site{
     position: fixed;
@@ -98,11 +125,18 @@ section{
 }
 
 /* ICONES */
+
+.topo-site .icons {
+    display: flex;
+    align-items: center;
+}
+
 .topo-site .icons div{
     font-size: 2.5rem;
     margin-left: 1.7rem;
     color: #fff;
     cursor: pointer;
+    line-height: 1;
 }
 
 .topo-site .icons div:hover{
@@ -522,79 +556,120 @@ section{
 
 /*Rodapé*/
 .rodape{
-  background-color: #ff0000;
-  text-align: center;
+background-color: #ff0000;
+text-align: center;
 }
 
 .rodape .box-container{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-  gap: 2rem;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+gap: 2rem;
 }
 
 .rodape .box-container .box h3{
-    font-size: 2.2rem;
-    text-transform: capitalize;
-    color: #fff;
-    padding: 1rem 0;
+font-size: 2.2rem;
+text-transform: capitalize;
+color: #fff;
+padding: 1rem 0;
 }
 
 .rodape .box-container .box p{
-    font-size: 1.5rem;
-    color: #fff;
-    line-height: 2;
-    padding: 1rem 0;
+font-size: 1.5rem;
+color: #fff;
+line-height: 2;
+padding: 1rem 0;
 }
 
-.rodape .box-container .box redes-sociais {
-    margin-top: 1rem;
+.rodape .box-container .box .rede-sociais {
+margin-top: 1rem;
 }
 
-.rodape .box-container .box redes-sociais a{
-    color: #fff;
-    border: 1rem solid #fff;
-    border-radius: 10%;
-    width: 4.5rem;
-    height: 4.5rem;
-    text-align: center;
-    font-size: 1.8rem;
-    margin-right: .3rem;
+.rodape .box-container .box .rede-sociais a{
+display: inline-block;
+color: #fff;
+border: .1rem solid #fff;
+border-radius: 10%;
+width: 4.5rem;
+height: 4.5rem;
+line-height: 4.3rem;
+text-align: center;
+font-size: 1.8rem;
+margin-right: .3rem;
 }
 
-.rodape .box-container .box .redes-sociais a:hover{
-    background-color: #fffb00;
-    color: #130f40;
-    border: .1rem solid #130f40;
+.rodape .box-container .box .rede-sociais a:hover {
+background-color: #fffb00;
+color: #130f40;
+border: .1rem solid #130f40;
 }
 
 .rodape .box-container .box .link{
-    display: block;
-    font-size: 1.7rem;
-    line-height: 2;
-    padding: .5rem 0;
-    text-decoration: underline;
-    color: #fff;
+display: block;
+font-size: 1.7rem;
+line-height: 2;
+padding: .5rem 0;
+text-decoration: underline;
+color: #fff;
 }
 
 .rodape .box-container .box .link:hover{
-    color: #fffb00;
+color: #fffb00;
 }
 
 .direitos {
     text-align: center;
     color: #fff;
-    font-size: 1.75rem;
+    font-size: 2rem;
     margin-top: 3rem;
     padding-top: 3rem;
     text-transform: capitalize;
-    border-top: 1px solid #fff;
+    border-top: .1rem solid #fff;
 }
 
 .direitos span {
     color: yellow;
 }
 
+/* GALERIA DE FOTOS */
+.galeria-fotos .galeria-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 2rem;
+}
 
+.galeria-fotos .galeria-container .box {
+    height: 30rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.galeria-fotos .galeria-container .box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.galeria-fotos .galeria-container .box .icon {
+    justify-content: center;
+    display: none;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+}
+
+.galeria-fotos .galeria-container .box .icon i {
+    font-size: 5rem;
+    color: #fff;
+}
+
+.galeria-fotos .galeria-container .box:hover .icon {
+    display: flex;
+}
 
 /* RESPONSIVIDADE */
 @media(max-width: 991px){
@@ -703,7 +778,4 @@ section{
     }
 
 }
-
-
-
 /* FIM EFEITOS SWIPER */

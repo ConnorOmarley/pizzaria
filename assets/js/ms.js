@@ -15,6 +15,12 @@ document.querySelector('#cart').onclick = () => {
 };
 /* FIM BOTÃO CARRINHO */
 
+window.onscroll = () => {
+    carrinho.classList.remove('active')
+    login.classList.remove('active')
+}
+
+
 /* INICIO BOTÃO LOGIN */
 document.querySelector('#login').onclick = () => {
 
