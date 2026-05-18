@@ -73,3 +73,16 @@ const swiper = new Swiper(".home-slider", {
 
 });
 /* FIM SWIPER SLIDER */
+
+document.addEventListener('DOMContentLoaded', function () {
+    var swiper = new Swiper(".menu-slider", {
+        grabCursor: true,
+        loop: true,
+        autoHeight: true,
+        spaceBetween: 20,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
+});
