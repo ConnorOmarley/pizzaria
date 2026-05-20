@@ -43,6 +43,16 @@ document.querySelector('#menu').onclick = () => {
 };
 /* FIM MENU MOBILE */
 
+/* INICIO MENU MOBILE RESPONSIVO */
+let menuResponsivo = document.querySelector('.menu-site');
+document.querySelector('#menu').onclick = () => {
+    menuResponsivo.classList.toggle('active');
+
+    carrinhoPainel.classList.remove('active');
+    loginPainel.classList.remove('active');
+}
+/* FIM MENU MOBILE RESPONSIVO */
+
 /* INICIO FECHAR PAINEIS AO ROLAR */
 window.onscroll = () => {
 
@@ -113,5 +123,4 @@ verModalCorpo.querySelector('#fechar').onclick = () => {
     verModalBox.forEach(fechar => {
         fechar.classList.remove('active')
     })
-
 }
