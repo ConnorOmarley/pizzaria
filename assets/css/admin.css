@@ -593,6 +593,74 @@ body {
 .toast.success { background: var(--success); }
 .toast.error   { background: var(--danger); }
 
+/* ===== CONTABILIDADE ===== */
+.year-select {
+  padding: .55rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: .875rem;
+  color: var(--text);
+  background: var(--card);
+  outline: none;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.year-select:focus { border-color: var(--accent); }
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.chart-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.chart-header h3 {
+  font-size: .95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.chart-year-badge {
+  font-size: .8rem;
+  color: var(--text-light);
+  background: var(--bg);
+  padding: .3rem .75rem;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.chart-wrap {
+  height: 260px;
+  position: relative;
+}
+
+.chart-wrap-sm {
+  height: 240px;
+}
+
+.month-highlight { background: #fffbeb !important; }
+
+@media (max-width: 900px) {
+  .charts-grid { grid-template-columns: 1fr; }
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .admin-sidebar { display: none; }

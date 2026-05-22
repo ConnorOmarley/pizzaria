@@ -7,7 +7,6 @@ if (!isset($_SESSION['admin_id'])) {
 
 require_once '../config/db.php';
 
-// Stats
 $stats = $conn->query("SELECT
     COUNT(*) AS total,
     SUM(category='doce') AS doces,
@@ -26,6 +25,7 @@ $adminName = htmlspecialchars($_SESSION['admin_username']);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -41,6 +41,9 @@ $adminName = htmlspecialchars($_SESSION['admin_username']);
     <nav class="sidebar-nav">
       <a href="#" class="nav-item active" data-tab="pizzas">
         <i class="fa-solid fa-pizza-slice"></i> Pizzas
+      </a>
+      <a href="#" class="nav-item" data-tab="contabilidade">
+        <i class="fa-solid fa-chart-column"></i> Contabilidade
       </a>
       <a href="/Pizzaria-1/" class="nav-item" target="_blank">
         <i class="fa-solid fa-globe"></i> Ver site
@@ -62,82 +65,179 @@ $adminName = htmlspecialchars($_SESSION['admin_username']);
 
   <!-- MAIN -->
   <main class="admin-main">
-    <div class="admin-topbar">
-      <h1 class="page-title"><i class="fa-solid fa-pizza-slice"></i> Gerenciar Pizzas</h1>
-      <button class="btn-add" id="btn-open-add">
-        <i class="fa-solid fa-plus"></i> Nova Pizza
-      </button>
-    </div>
 
-    <!-- STATS -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon" style="background:rgba(245,158,11,.15);color:#f59e0b">
-          <i class="fa-solid fa-list"></i>
-        </div>
-        <div class="stat-info">
-          <div class="stat-value"><?= $stats['total'] ?></div>
-          <div class="stat-label">Total de Pizzas</div>
-        </div>
+    <!-- ===== ABA PIZZAS ===== -->
+    <div id="tab-pizzas">
+      <div class="admin-topbar">
+        <h1 class="page-title"><i class="fa-solid fa-pizza-slice"></i> Gerenciar Pizzas</h1>
+        <button class="btn-add" id="btn-open-add">
+          <i class="fa-solid fa-plus"></i> Nova Pizza
+        </button>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon" style="background:rgba(249,115,22,.15);color:#f97316">
-          <i class="fa-solid fa-cookie-bite"></i>
-        </div>
-        <div class="stat-info">
-          <div class="stat-value"><?= $stats['doces'] ?></div>
-          <div class="stat-label">Doces</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon" style="background:rgba(168,85,247,.15);color:#a855f7">
-          <i class="fa-solid fa-pepper-hot"></i>
-        </div>
-        <div class="stat-info">
-          <div class="stat-value"><?= $stats['salgadas'] ?></div>
-          <div class="stat-label">Salgadas</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon" style="background:rgba(34,197,94,.15);color:#22c55e">
-          <i class="fa-solid fa-circle-check"></i>
-        </div>
-        <div class="stat-info">
-          <div class="stat-value"><?= $stats['ativas'] ?></div>
-          <div class="stat-label">Disponíveis</div>
-        </div>
-      </div>
-    </div>
 
-    <!-- TABELA -->
-    <div class="table-card">
-      <div class="table-header">
-        <input class="search-input" type="text" id="search-input" placeholder="🔍  Buscar pizza...">
-        <div class="filter-btns">
-          <button class="filter-btn active" data-filter="all">Todas</button>
-          <button class="filter-btn" data-filter="doce">Doces</button>
-          <button class="filter-btn" data-filter="salgada">Salgadas</button>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(245,158,11,.15);color:#f59e0b">
+            <i class="fa-solid fa-list"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value"><?= $stats['total'] ?></div>
+            <div class="stat-label">Total de Pizzas</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(249,115,22,.15);color:#f97316">
+            <i class="fa-solid fa-cookie-bite"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value"><?= $stats['doces'] ?></div>
+            <div class="stat-label">Doces</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(168,85,247,.15);color:#a855f7">
+            <i class="fa-solid fa-pepper-hot"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value"><?= $stats['salgadas'] ?></div>
+            <div class="stat-label">Salgadas</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(34,197,94,.15);color:#22c55e">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value"><?= $stats['ativas'] ?></div>
+            <div class="stat-label">Disponíveis</div>
+          </div>
         </div>
       </div>
-      <div class="table-wrap">
-        <table class="pizza-table" id="pizza-table">
-          <thead>
-            <tr>
-              <th>Imagem</th>
-              <th>Nome</th>
-              <th>Categoria</th>
-              <th>Preço</th>
-              <th>Desc.</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="pizza-tbody">
-            <tr><td colspan="7" class="loading-row"><i class="fa-solid fa-spinner fa-spin"></i> Carregando...</td></tr>
-          </tbody>
-        </table>
+
+      <div class="table-card">
+        <div class="table-header">
+          <input class="search-input" type="text" id="search-input" placeholder="🔍  Buscar pizza...">
+          <div class="filter-btns">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="doce">Doces</button>
+            <button class="filter-btn" data-filter="salgada">Salgadas</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="pizza-table" id="pizza-table">
+            <thead>
+              <tr>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Desc.</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="pizza-tbody">
+              <tr><td colspan="7" class="loading-row"><i class="fa-solid fa-spinner fa-spin"></i> Carregando...</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </div><!-- /tab-pizzas -->
+
+    <!-- ===== ABA CONTABILIDADE ===== -->
+    <div id="tab-contabilidade" style="display:none">
+      <div class="admin-topbar">
+        <h1 class="page-title"><i class="fa-solid fa-chart-column"></i> Contabilidade</h1>
+        <select id="year-select" class="year-select">
+          <option value="2026">2026</option>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+        </select>
+      </div>
+
+      <!-- KPIs do mês -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(34,197,94,.15);color:#22c55e">
+            <i class="fa-solid fa-money-bill-wave"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-faturamento">—</div>
+            <div class="stat-label">Faturamento do Mês</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(59,130,246,.15);color:#3b82f6">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-pedidos">—</div>
+            <div class="stat-label">Pedidos no Mês</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(168,85,247,.15);color:#a855f7">
+            <i class="fa-solid fa-receipt"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-ticket">—</div>
+            <div class="stat-label">Ticket Médio</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:rgba(245,158,11,.15);color:#f59e0b">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="stat-crescimento">—</div>
+            <div class="stat-label">vs. Mês Anterior</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráficos -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3><i class="fa-solid fa-chart-bar" style="color:var(--accent)"></i> Faturamento Mensal</h3>
+            <span class="chart-year-badge" id="chart-year-label">2026</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="chart-revenue"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3><i class="fa-solid fa-chart-pie" style="color:var(--accent)"></i> Vendas por Tipo</h3>
+          </div>
+          <div class="chart-wrap chart-wrap-sm">
+            <canvas id="chart-category"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela mensal -->
+      <div class="table-card">
+        <div class="table-header">
+          <h3 style="font-size:.95rem;font-weight:700">Detalhamento Mensal</h3>
+        </div>
+        <div class="table-wrap">
+          <table class="pizza-table">
+            <thead>
+              <tr>
+                <th>Mês</th>
+                <th>Pedidos</th>
+                <th>Faturamento</th>
+                <th>Ticket Médio</th>
+                <th>Variação</th>
+              </tr>
+            </thead>
+            <tbody id="month-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div><!-- /tab-contabilidade -->
+
   </main>
 
   <!-- MODAL ADD / EDIT -->
@@ -249,6 +349,6 @@ $adminName = htmlspecialchars($_SESSION['admin_username']);
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
-  <script src="../assets/js/admin.js"></script>
+  <script src="../assets/js/admin.js?v=3"></script>
 </body>
 </html>

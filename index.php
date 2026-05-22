@@ -39,6 +39,7 @@ function renderStars(float $rating): string {
   <link rel="shortcut icon" type="image/x-icon" href="assets/img/msFavicon.png" />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/auth.css" />
+  <link rel="stylesheet" href="assets/css/payment.css" />
   <title>Pizzaria Taurus</title>
   <style>
     body { font-family: 'Poppins', sans-serif; }
@@ -390,6 +391,204 @@ function renderStars(float $rating): string {
         </div>
         <button id="add-to-cart-final-btn" class="btn-default">
           <i class="fa-solid fa-cart-plus"></i> Adicionar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PAGAMENTO -->
+  <div id="payment-modal" class="modal">
+    <div class="modal-content product-detail-content">
+      <div class="modal-header">
+        <h2>💳 Finalizar Pedido</h2>
+        <button class="close-payment"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Resumo -->
+      <div class="payment-summary">
+        <h4>Resumo do Pedido</h4>
+        <div id="payment-items-list"></div>
+        <div class="payment-total-line">
+          <span>Total</span>
+          <strong id="payment-total-display">R$ 0,00</strong>
+        </div>
+      </div>
+
+      <!-- Métodos -->
+      <div class="payment-methods">
+        <h4>Método de Pagamento</h4>
+        <div class="payment-tabs">
+          <button class="pay-tab active" data-method="pix">
+            <i class="fa-brands fa-pix"></i> PIX
+          </button>
+          <button class="pay-tab" data-method="debito">
+            <i class="fa-solid fa-credit-card"></i> Débito
+          </button>
+          <button class="pay-tab" data-method="credito">
+            <i class="fa-regular fa-credit-card"></i> Crédito
+          </button>
+        </div>
+
+        <!-- PIX -->
+        <div id="pay-view-pix" class="pay-view">
+          <div class="pix-container">
+            <div class="pix-qr-box">
+              <!-- QR Code decorativo SVG -->
+              <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+                <!-- Corner TL -->
+                <rect x="5" y="5" width="36" height="36" rx="4" fill="#111"/>
+                <rect x="11" y="11" width="24" height="24" rx="2" fill="#fff"/>
+                <rect x="17" y="17" width="12" height="12" rx="1" fill="#111"/>
+                <!-- Corner TR -->
+                <rect x="69" y="5" width="36" height="36" rx="4" fill="#111"/>
+                <rect x="75" y="11" width="24" height="24" rx="2" fill="#fff"/>
+                <rect x="81" y="17" width="12" height="12" rx="1" fill="#111"/>
+                <!-- Corner BL -->
+                <rect x="5" y="69" width="36" height="36" rx="4" fill="#111"/>
+                <rect x="11" y="75" width="24" height="24" rx="2" fill="#fff"/>
+                <rect x="17" y="81" width="12" height="12" rx="1" fill="#111"/>
+                <!-- Data modules -->
+                <rect x="47" y="5"  width="6" height="6" rx="1" fill="#111"/>
+                <rect x="57" y="5"  width="6" height="6" rx="1" fill="#111"/>
+                <rect x="47" y="15" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="57" y="15" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="47" y="25" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="47" y="35" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="57" y="35" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="5"  y="47" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="15" y="47" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="25" y="47" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="35" y="47" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="5"  y="57" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="25" y="57" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="35" y="57" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="69" y="47" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="79" y="47" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="99" y="47" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="69" y="57" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="89" y="57" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="47" y="69" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="57" y="69" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="47" y="79" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="67" y="79" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="57" y="89" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="47" y="99" width="6" height="6" rx="1" fill="#111"/>
+                <rect x="67" y="99" width="6" height="6" rx="1" fill="#111"/>
+                <!-- PIX center badge -->
+                <rect x="43" y="43" width="24" height="24" rx="5" fill="#00bdae"/>
+                <text x="55" y="59" text-anchor="middle" font-size="9" fill="white" font-weight="bold" font-family="Arial">PIX</text>
+              </svg>
+            </div>
+            <div class="pix-info">
+              <p class="pix-label">Chave PIX (telefone)</p>
+              <div class="pix-key-box">
+                <span id="pix-key-text">(81) 99770-8693</span>
+                <button class="btn-copy-pix" id="btn-copy-pix" title="Copiar chave">
+                  <i class="fa-solid fa-copy"></i>
+                </button>
+              </div>
+              <p class="pix-hint">Abra o app do banco, escaneie o QR Code ou cole a chave PIX acima para pagar.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- DÉBITO -->
+        <div id="pay-view-debito" class="pay-view" style="display:none">
+          <div class="card-visual">
+            <div class="card-chip"></div>
+            <div class="card-number-display" id="deb-num-display">•••• •••• •••• ••••</div>
+            <div class="card-bottom">
+              <span class="card-name-display" id="deb-name-display">NOME DO TITULAR</span>
+              <span class="card-expiry-display" id="deb-exp-display">MM/AA</span>
+            </div>
+          </div>
+          <div class="card-inputs">
+            <div class="pay-field">
+              <label>Número do Cartão</label>
+              <input type="text" id="deb-number" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric">
+            </div>
+            <div class="pay-field">
+              <label>Nome do Titular</label>
+              <input type="text" id="deb-name" placeholder="Como impresso no cartão">
+            </div>
+            <div class="pay-field-row">
+              <div class="pay-field">
+                <label>Validade</label>
+                <input type="text" id="deb-expiry" placeholder="MM/AA" maxlength="5" inputmode="numeric">
+              </div>
+              <div class="pay-field">
+                <label>CVV</label>
+                <input type="text" id="deb-cvv" placeholder="123" maxlength="3" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CRÉDITO -->
+        <div id="pay-view-credito" class="pay-view" style="display:none">
+          <div class="card-visual" style="background:linear-gradient(135deg,#1e3a5f 0%,#0d2137 50%,#051525 100%)">
+            <div class="card-chip"></div>
+            <div class="card-number-display" id="cred-num-display">•••• •••• •••• ••••</div>
+            <div class="card-bottom">
+              <span class="card-name-display" id="cred-name-display">NOME DO TITULAR</span>
+              <span class="card-expiry-display" id="cred-exp-display">MM/AA</span>
+            </div>
+          </div>
+          <div class="card-inputs">
+            <div class="pay-field">
+              <label>Número do Cartão</label>
+              <input type="text" id="cred-number" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric">
+            </div>
+            <div class="pay-field">
+              <label>Nome do Titular</label>
+              <input type="text" id="cred-name" placeholder="Como impresso no cartão">
+            </div>
+            <div class="pay-field-row">
+              <div class="pay-field">
+                <label>Validade</label>
+                <input type="text" id="cred-expiry" placeholder="MM/AA" maxlength="5" inputmode="numeric">
+              </div>
+              <div class="pay-field">
+                <label>CVV</label>
+                <input type="text" id="cred-cvv" placeholder="123" maxlength="3" inputmode="numeric">
+              </div>
+            </div>
+            <div class="pay-field">
+              <label>Parcelas</label>
+              <select id="cred-installments">
+                <option value="1">1× sem juros</option>
+                <option value="2">2× sem juros</option>
+                <option value="3">3× sem juros</option>
+                <option value="4">4× sem juros</option>
+                <option value="6">6× sem juros</option>
+                <option value="10">10× com juros (1,99%)</option>
+                <option value="12">12× com juros (1,99%)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div><!-- /payment-methods -->
+
+      <div class="payment-footer">
+        <button class="btn-confirm" id="btn-confirm-payment">
+          <i class="fa-solid fa-lock"></i> Confirmar Pagamento
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SUCESSO -->
+  <div id="success-modal" class="modal">
+    <div class="modal-content product-detail-content">
+      <div class="success-content">
+        <div class="success-icon">🎉</div>
+        <h2>Pedido Confirmado!</h2>
+        <p>Seu pedido foi recebido e já está sendo preparado com carinho.</p>
+        <div class="success-eta">
+          <i class="fa-solid fa-clock"></i> Tempo estimado: 30–45 minutos
+        </div>
+        <button id="btn-close-success" class="btn-default">
+          <i class="fa-solid fa-utensils"></i> Voltar ao cardápio
         </button>
       </div>
     </div>

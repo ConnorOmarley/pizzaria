@@ -1,0 +1,427 @@
+/* ========== PAYMENT MODAL ========== */
+
+#payment-modal .modal-content,
+#success-modal .modal-content {
+    max-width: 480px;
+    max-height: 92vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+}
+
+/* Resumo do pedido */
+.payment-summary {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,.07);
+}
+
+body.dark .payment-summary {
+    border-color: rgba(255,255,255,.07);
+}
+
+.payment-summary h4,
+.payment-methods h4 {
+    font-size: .82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #999;
+    margin-bottom: .85rem;
+}
+
+.payment-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: .45rem 0;
+    font-size: .88rem;
+    gap: .5rem;
+}
+
+.payment-item-row:not(:last-child) {
+    border-bottom: 1px dashed rgba(0,0,0,.06);
+}
+
+body.dark .payment-item-row:not(:last-child) {
+    border-color: rgba(255,255,255,.06);
+}
+
+.payment-item-name {
+    font-weight: 600;
+    flex: 1;
+}
+
+.payment-item-note {
+    font-size: .75rem;
+    color: #999;
+    margin-top: 2px;
+}
+
+.payment-item-price {
+    font-weight: 700;
+    color: #ffb300;
+    white-space: nowrap;
+}
+
+.payment-total-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: .85rem;
+    border-top: 2px solid rgba(0,0,0,.08);
+    font-size: 1rem;
+}
+
+body.dark .payment-total-line {
+    border-color: rgba(255,255,255,.1);
+}
+
+.payment-total-line strong {
+    font-size: 1.25rem;
+    color: #ffb300;
+}
+
+/* Métodos de pagamento */
+.payment-methods {
+    padding: 1.25rem 1.5rem;
+}
+
+.payment-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+}
+
+.pay-tab {
+    flex: 1;
+    padding: .6rem .5rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    background: transparent;
+    font-family: 'Poppins', sans-serif;
+    font-size: .8rem;
+    font-weight: 600;
+    color: #888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+    transition: all .2s;
+}
+
+body.dark .pay-tab {
+    border-color: #333;
+    color: #666;
+}
+
+.pay-tab.active {
+    background: linear-gradient(135deg, #ffb300, #ffcc33);
+    border-color: transparent;
+    color: #1a1a1a;
+    box-shadow: 0 3px 10px rgba(255,179,0,.3);
+}
+
+/* PIX */
+.pix-container {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+}
+
+.pix-qr-box {
+    width: 130px;
+    height: 130px;
+    border-radius: 12px;
+    border: 2px solid #e5e7eb;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: white;
+}
+
+body.dark .pix-qr-box {
+    border-color: #333;
+}
+
+.pix-qr-box svg {
+    width: 110px;
+    height: 110px;
+}
+
+.pix-info {
+    flex: 1;
+}
+
+.pix-label {
+    font-size: .78rem;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: .5rem;
+}
+
+.pix-key-box {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    background: #f3f4f6;
+    border-radius: 10px;
+    padding: .55rem .85rem;
+    margin-bottom: .75rem;
+}
+
+body.dark .pix-key-box {
+    background: #2a2a2a;
+}
+
+.pix-key-box span {
+    flex: 1;
+    font-size: .88rem;
+    font-weight: 600;
+    font-family: monospace;
+}
+
+.btn-copy-pix {
+    background: none;
+    border: none;
+    color: #ffb300;
+    cursor: pointer;
+    font-size: .95rem;
+    padding: .2rem;
+    transition: transform .15s;
+}
+
+.btn-copy-pix:hover { transform: scale(1.2); }
+
+.pix-hint {
+    font-size: .78rem;
+    color: #aaa;
+    line-height: 1.5;
+}
+
+/* Cartão visual */
+.card-visual {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 120px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+
+.card-visual::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+}
+
+.card-visual::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 60px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.03);
+}
+
+.card-chip {
+    width: 38px;
+    height: 28px;
+    background: linear-gradient(135deg, #d4a843, #f0c040);
+    border-radius: 5px;
+    margin-bottom: .85rem;
+}
+
+.card-number-display {
+    font-size: 1.05rem;
+    letter-spacing: .18em;
+    color: rgba(255,255,255,.9);
+    font-family: 'Courier New', monospace;
+    margin-bottom: .85rem;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-name-display {
+    font-size: .75rem;
+    color: rgba(255,255,255,.7);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-expiry-display {
+    font-size: .78rem;
+    color: rgba(255,255,255,.7);
+    letter-spacing: .05em;
+}
+
+/* Inputs do cartão */
+.card-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: .85rem;
+}
+
+.pay-field {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.pay-field label {
+    font-size: .78rem;
+    font-weight: 700;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+body.dark .pay-field label {
+    color: #888;
+}
+
+.pay-field input,
+.pay-field select {
+    padding: .65rem .9rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: .9rem;
+    background: #f9fafb;
+    color: #111;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+}
+
+body.dark .pay-field input,
+body.dark .pay-field select {
+    background: #2a2a2a;
+    border-color: #333;
+    color: #eee;
+}
+
+.pay-field input:focus,
+.pay-field select:focus {
+    border-color: #ffb300;
+    box-shadow: 0 0 0 3px rgba(255,179,0,.15);
+}
+
+.pay-field-row {
+    display: flex;
+    gap: .75rem;
+}
+
+.pay-field-row .pay-field {
+    flex: 1;
+}
+
+/* Rodapé do pagamento */
+.payment-footer {
+    padding: 1rem 1.5rem 1.5rem;
+    border-top: 1px solid rgba(0,0,0,.06);
+}
+
+body.dark .payment-footer {
+    border-color: rgba(255,255,255,.06);
+}
+
+.btn-confirm {
+    width: 100%;
+    padding: .85rem;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #ffb300, #ffcc33);
+    color: #1a1a1a;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    transition: all .2s;
+    box-shadow: 0 4px 16px rgba(255,179,0,.35);
+}
+
+.btn-confirm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255,179,0,.4);
+}
+
+.btn-confirm:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Tela de sucesso */
+.success-content {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+}
+
+.success-icon {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: .5rem;
+    animation: popIn .4s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+@keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+.success-content h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.success-content p {
+    color: #777;
+    font-size: .9rem;
+}
+
+.success-eta {
+    background: rgba(34,197,94,.1);
+    color: #166534;
+    border-radius: 10px;
+    padding: .6rem 1.2rem;
+    font-size: .88rem;
+    font-weight: 600;
+    margin: .25rem 0 .75rem;
+}
+
+body.dark .success-eta {
+    background: rgba(34,197,94,.15);
+    color: #86efac;
+}

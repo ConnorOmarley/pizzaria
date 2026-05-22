@@ -434,6 +434,158 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ========================= */
+    /* PAGAMENTO */
+    /* ========================= */
+
+    const paymentModal = document.getElementById('payment-modal');
+    const successModal = document.getElementById('success-modal');
+
+    function openPaymentModal() {
+        if (carrinho.length === 0) return;
+
+        // Preenche o resumo do pedido
+        const list = document.getElementById('payment-items-list');
+        const totalDisplay = document.getElementById('payment-total-display');
+        if (list) {
+            let total = 0;
+            list.innerHTML = carrinho.map(item => {
+                total += item.totalPrice;
+                const notasSem  = item.remove.length ? `Sem: ${item.remove.join(', ')}` : '';
+                const notasMais = item.add.length    ? `Mais: ${item.add.join(', ')}` : '';
+                const nota = [notasSem, notasMais].filter(Boolean).join(' | ') || 'Tradicional';
+                return `<div class="payment-item-row">
+                    <div>
+                        <div class="payment-item-name">${item.name}</div>
+                        <div class="payment-item-note">${nota}</div>
+                    </div>
+                    <span class="payment-item-price">R$ ${item.totalPrice.toFixed(2).replace('.', ',')}</span>
+                </div>`;
+            }).join('');
+            if (totalDisplay) totalDisplay.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+            // Atualiza parcelas do crédito com valor correto
+            updateInstallments(total);
+        }
+
+        paymentModal?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function updateInstallments(total) {
+        const sel = document.getElementById('cred-installments');
+        if (!sel) return;
+        const options = [
+            { v: 1,  label: `1× de R$ ${total.toFixed(2).replace('.', ',')} sem juros` },
+            { v: 2,  label: `2× de R$ ${(total/2).toFixed(2).replace('.', ',')} sem juros` },
+            { v: 3,  label: `3× de R$ ${(total/3).toFixed(2).replace('.', ',')} sem juros` },
+            { v: 4,  label: `4× de R$ ${(total/4).toFixed(2).replace('.', ',')} sem juros` },
+            { v: 6,  label: `6× de R$ ${(total/6).toFixed(2).replace('.', ',')} sem juros` },
+            { v: 10, label: `10× de R$ ${(total*1.199/10).toFixed(2).replace('.', ',')} com juros` },
+            { v: 12, label: `12× de R$ ${(total*1.199/12).toFixed(2).replace('.', ',')} com juros` },
+        ];
+        sel.innerHTML = options.map(o => `<option value="${o.v}">${o.label}</option>`).join('');
+    }
+
+    // Botão "Finalizar Pedido" no carrinho
+    document.querySelector('.finalizar-btn')?.addEventListener('click', () => {
+        if (carrinho.length === 0) return;
+        closeSidebar(cartModal);
+        setTimeout(() => openPaymentModal(), 200);
+    });
+
+    // Fechar modal pagamento
+    document.querySelector('.close-payment')?.addEventListener('click', () => {
+        paymentModal?.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    paymentModal?.addEventListener('click', (e) => {
+        if (e.target === paymentModal) {
+            paymentModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Tabs de método de pagamento
+    document.querySelectorAll('.pay-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.pay-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            ['pix','debito','credito'].forEach(m => {
+                const view = document.getElementById(`pay-view-${m}`);
+                if (view) view.style.display = btn.dataset.method === m ? '' : 'none';
+            });
+        });
+    });
+
+    // Copiar chave PIX
+    document.getElementById('btn-copy-pix')?.addEventListener('click', () => {
+        const key = document.getElementById('pix-key-text')?.textContent || '';
+        navigator.clipboard.writeText(key).then(() => {
+            const btn = document.getElementById('btn-copy-pix');
+            if (btn) {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                setTimeout(() => btn.innerHTML = '<i class="fa-solid fa-copy"></i>', 1500);
+            }
+        });
+    });
+
+    // Formatação do número do cartão (####-####-####-####)
+    function setupCardInput(numberId, nameId, expiryId, numDisplayId, nameDisplayId, expDisplayId) {
+        const numInput = document.getElementById(numberId);
+        const nameInput = document.getElementById(nameId);
+        const expInput = document.getElementById(expiryId);
+
+        numInput?.addEventListener('input', () => {
+            let v = numInput.value.replace(/\D/g, '').slice(0, 16);
+            numInput.value = v.replace(/(.{4})/g, '$1 ').trim();
+            const display = document.getElementById(numDisplayId);
+            if (display) {
+                const padded = v.padEnd(16, '•');
+                display.textContent = padded.replace(/(.{4})/g, '$1 ').trim();
+            }
+        });
+
+        nameInput?.addEventListener('input', () => {
+            const display = document.getElementById(nameDisplayId);
+            if (display) display.textContent = nameInput.value.toUpperCase() || 'NOME DO TITULAR';
+        });
+
+        expInput?.addEventListener('input', () => {
+            let v = expInput.value.replace(/\D/g, '').slice(0, 4);
+            if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+            expInput.value = v;
+            const display = document.getElementById(expDisplayId);
+            if (display) display.textContent = expInput.value || 'MM/AA';
+        });
+    }
+
+    setupCardInput('deb-number', 'deb-name', 'deb-expiry', 'deb-num-display', 'deb-name-display', 'deb-exp-display');
+    setupCardInput('cred-number', 'cred-name', 'cred-expiry', 'cred-num-display', 'cred-name-display', 'cred-exp-display');
+
+    // Confirmar pagamento → sucesso
+    document.getElementById('btn-confirm-payment')?.addEventListener('click', () => {
+        const btn = document.getElementById('btn-confirm-payment');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processando...';
+
+        setTimeout(() => {
+            paymentModal?.classList.remove('active');
+            successModal?.classList.add('active');
+            carrinho = [];
+            renderCarrinho();
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-lock"></i> Confirmar Pagamento';
+        }, 1800);
+    });
+
+    // Fechar sucesso
+    document.getElementById('btn-close-success')?.addEventListener('click', () => {
+        successModal?.classList.remove('active');
+        document.body.style.overflow = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ========================= */
     /* RENDERIZAR CARRINHO */
     /* ========================= */
 

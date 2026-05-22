@@ -258,5 +258,175 @@ function resetImagePreview(showCurrent) {
     document.getElementById('current-img-info').style.display = showCurrent ? 'block' : 'none';
 }
 
+/* ===== TABS ===== */
+let contabilidadeInited = false;
+
+document.querySelectorAll('.nav-item[data-tab]').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tab = link.dataset.tab;
+
+        document.querySelectorAll('.nav-item[data-tab]').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+
+        document.getElementById('tab-pizzas').style.display          = tab === 'pizzas'        ? '' : 'none';
+        document.getElementById('tab-contabilidade').style.display   = tab === 'contabilidade' ? '' : 'none';
+
+        if (tab === 'contabilidade') {
+            try { initContabilidade(); } catch(err) { console.error('Contabilidade:', err); }
+        }
+    });
+});
+
+/* ===== CONTABILIDADE ===== */
+const MONTH_SHORT = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+const MONTH_FULL  = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+const REVENUE = {
+    2026: [5100, 4820, 5340, 5890, 6240,    0,    0,    0,    0,    0,    0,    0],
+    2025: [4250, 3920, 4610, 5080, 5740, 6180, 6720, 6490, 5880, 5420, 6080, 8150],
+    2024: [3820, 3650, 4120, 4780, 5250, 5690, 6080, 5870, 5320, 4960, 5580, 7450],
+};
+const ORDERS = {
+    2026: [102,   96,  107,  118,  125,    0,    0,    0,    0,    0,    0,    0],
+    2025: [  85,  78,   92,  102,  115,  124,  134,  130,  118,  108,  122,  163],
+    2024: [  76,  73,   82,   96,  105,  114,  122,  117,  106,   99,  112,  149],
+};
+
+let revenueChart  = null;
+let categoryChart = null;
+const NOW_MONTH = new Date().getMonth();
+const NOW_YEAR  = new Date().getFullYear();
+
+function fmtBRL(v) {
+    return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+
+function initContabilidade() {
+    const year = parseInt(document.getElementById('year-select').value);
+    const rev  = REVENUE[year] || REVENUE[2025];
+    const ord  = ORDERS[year]  || ORDERS[2025];
+
+    document.getElementById('chart-year-label').textContent = year;
+
+    // KPIs — usa o mês atual se o ano for o corrente, senão usa Dezembro
+    const kpiMonth = (year === NOW_YEAR) ? NOW_MONTH : 11;
+    const prevM    = kpiMonth > 0 ? kpiMonth - 1 : 11;
+
+    const mRev    = rev[kpiMonth] || 0;
+    const mOrd    = ord[kpiMonth] || 0;
+    const mTicket = mOrd > 0 ? Math.round(mRev / mOrd) : 0;
+    const pRev    = rev[prevM] || 0;
+    const growth  = pRev > 0 ? ((mRev - pRev) / pRev * 100).toFixed(1) : '0';
+
+    document.getElementById('stat-faturamento').textContent  = fmtBRL(mRev);
+    document.getElementById('stat-pedidos').textContent      = mOrd;
+    document.getElementById('stat-ticket').textContent       = fmtBRL(mTicket);
+    const growEl = document.getElementById('stat-crescimento');
+    growEl.textContent = (growth >= 0 ? '+' : '') + growth + '%';
+    growEl.style.color = growth >= 0 ? '#22c55e' : '#ef4444';
+
+    // Bar chart — faturamento mensal
+    const revenueCtx = document.getElementById('chart-revenue').getContext('2d');
+    if (revenueChart) revenueChart.destroy();
+    revenueChart = new Chart(revenueCtx, {
+        type: 'bar',
+        data: {
+            labels: MONTH_SHORT,
+            datasets: [{
+                label: 'Faturamento',
+                data: rev,
+                backgroundColor: rev.map((v, i) =>
+                    i === kpiMonth && year === NOW_YEAR
+                        ? 'rgba(245,158,11,1)'
+                        : v > 0 ? 'rgba(245,158,11,0.4)' : 'rgba(0,0,0,0.05)'
+                ),
+                borderRadius: 7,
+                borderSkipped: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: { label: ctx => ' ' + fmtBRL(ctx.raw) }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(0,0,0,.05)' },
+                    ticks: { callback: v => 'R$ ' + (v/1000).toFixed(1) + 'k', font: { size: 11 } }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { size: 11 } }
+                }
+            }
+        }
+    });
+
+    // Donut chart — categoria
+    const doces    = pizzas.filter(p => p.category === 'doce').length    || 4;
+    const salgadas = pizzas.filter(p => p.category === 'salgada').length || 4;
+    const catCtx   = document.getElementById('chart-category').getContext('2d');
+    if (categoryChart) categoryChart.destroy();
+    categoryChart = new Chart(catCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Doces', 'Salgadas'],
+            datasets: [{
+                data: [doces, salgadas],
+                backgroundColor: ['#f97316', '#a855f7'],
+                borderWidth: 0,
+                hoverOffset: 8,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '68%',
+            plugins: {
+                legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 16 } },
+                tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}` } }
+            }
+        }
+    });
+
+    // Tabela detalhada
+    const tbody = document.getElementById('month-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = rev.map((revenue, i) => {
+        if (revenue === 0 && year === NOW_YEAR && i > NOW_MONTH) {
+            return `<tr style="opacity:.35">
+                <td>${MONTH_FULL[i]}</td>
+                <td>—</td><td>—</td><td>—</td><td>—</td>
+            </tr>`;
+        }
+        const orders = ord[i];
+        const ticket = orders > 0 ? Math.round(revenue / orders) : 0;
+        const prev   = i > 0 ? rev[i - 1] : null;
+        let variacao = '—';
+        if (prev && prev > 0) {
+            const g = ((revenue - prev) / prev * 100).toFixed(1);
+            const cor   = g >= 0 ? '#22c55e' : '#ef4444';
+            const arrow = g >= 0 ? '↑' : '↓';
+            variacao = `<span style="color:${cor};font-weight:600">${arrow} ${Math.abs(g)}%</span>`;
+        }
+        const isCurrent = i === kpiMonth && year === NOW_YEAR;
+        return `<tr class="${isCurrent ? 'month-highlight' : ''}">
+            <td><strong>${MONTH_FULL[i]}</strong>${isCurrent ? ' <span class="badge badge-doce">Atual</span>' : ''}</td>
+            <td>${orders}</td>
+            <td><strong>${fmtBRL(revenue)}</strong></td>
+            <td>${fmtBRL(ticket)}</td>
+            <td>${variacao}</td>
+        </tr>`;
+    }).join('');
+}
+
+document.getElementById('year-select')?.addEventListener('change', initContabilidade);
+
 /* ===== INIT ===== */
 loadPizzas();
