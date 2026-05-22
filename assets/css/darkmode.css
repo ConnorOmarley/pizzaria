@@ -209,3 +209,78 @@ body.dark .avaliacao-card{
 body.dark .avaliacao-card p{
     color: #cfcfcf;
 }
+
+/* ========================= */
+/* SIDEBARS DARK MODE */
+/* ========================= */
+
+body.dark .sidebar-content {
+    background: #1a1a1a;
+    color: white;
+}
+
+body.dark .sidebar-header {
+    border-bottom-color: rgba(255,255,255,0.06);
+}
+
+body.dark .sidebar-header h2 {
+    color: white;
+}
+
+body.dark .sidebar-header button {
+    color: #d1d1d1;
+}
+
+body.dark .cart-item-row {
+    border-bottom-color: rgba(255,255,255,0.06);
+}
+
+body.dark .cart-item-info h5 {
+    color: white;
+}
+
+body.dark .cart-item-details {
+    color: #aaa;
+}
+
+body.dark .cart-item-price {
+    color: #f1f1f1;
+}
+
+body.dark .cart-footer {
+    border-top-color: rgba(255,255,255,0.06);
+}
+
+body.dark .cart-total {
+    color: white;
+}
+
+body.dark .cart-empty {
+    color: #888;
+}
+
+body.dark #avalia {
+    background: #121212;
+    color: white;
+}
+
+body.dark #avalia h1 {
+    color: white;
+}
+
+body.dark .custom-section h4 {
+    color: #e0e0e0;
+    border-bottom-color: rgba(255,255,255,0.06);
+}
+
+body.dark .checkbox-label {
+    color: #d1d1d1;
+}
+
+body.dark .modal-footer-action {
+    border-top-color: rgba(255,255,255,0.08);
+}
+
+body.dark .modal-price-preview {
+    color: white;
+}
