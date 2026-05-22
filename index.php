@@ -1,5 +1,10 @@
 <?php
+session_start();
 require_once 'config/db.php';
+
+$userLoggedIn = isset($_SESSION['user_id']);
+$userName     = htmlspecialchars($_SESSION['user_name']  ?? '');
+$userEmail    = htmlspecialchars($_SESSION['user_email'] ?? '');
 
 $doces = [];
 $salgadas = [];
@@ -33,6 +38,7 @@ function renderStars(float $rating): string {
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="shortcut icon" type="image/x-icon" href="assets/img/msFavicon.png" />
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/auth.css" />
   <title>Pizzaria Taurus</title>
   <style>
     body { font-family: 'Poppins', sans-serif; }
@@ -48,6 +54,11 @@ function renderStars(float $rating): string {
         }
       } catch (e) {}
     })();
+    window.USER = <?= json_encode([
+      'logged_in' => $userLoggedIn,
+      'name'      => $_SESSION['user_name']  ?? '',
+      'email'     => $_SESSION['user_email'] ?? '',
+    ]) ?>;
   </script>
 </head>
 
@@ -70,7 +81,7 @@ function renderStars(float $rating): string {
           <i class="fa-solid fa-cart-shopping"></i>
           <span id="cart-count">0</span>
         </button>
-        <button id="login-toggle">
+        <button id="login-toggle"<?= $userLoggedIn ? ' class="logged-in"' : '' ?>>
           <i class="fa-solid fa-user"></i>
         </button>
         <button id="theme-toggle">
@@ -260,18 +271,100 @@ function renderStars(float $rating): string {
   <div id="login-modal" class="modal-sidebar">
     <div class="sidebar-content">
       <div class="sidebar-header">
-        <h2>👤 Entrar</h2>
+        <h2><i class="fa-solid fa-user"></i> Minha Conta</h2>
         <button class="close-login"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div style="padding:1rem 0">
-        <p style="color:#777;font-size:.9rem;margin-bottom:1.5rem">
-          Área do cliente em breve. Para acesso administrativo:
-        </p>
-        <a href="/Pizzaria-1/admin/login.php"
-           style="display:flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,#ffb300,#ffcc33);color:#1a1a1a;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700;justify-content:center">
-          <i class="fa-solid fa-lock"></i> Painel Administrativo
-        </a>
+
+      <!-- USUÁRIO LOGADO -->
+      <div id="user-logged-view" style="<?= $userLoggedIn ? '' : 'display:none' ?>">
+        <div class="user-avatar-box">
+          <div class="user-avatar-circle">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <h3 id="user-display-name"><?= $userName ?></h3>
+          <p id="user-display-email"><?= $userEmail ?></p>
+        </div>
+        <div class="auth-divider"></div>
+        <button id="logout-btn" class="btn-logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Sair da conta
+        </button>
       </div>
+
+      <!-- FORMULÁRIOS DE AUTH -->
+      <div id="auth-view" style="<?= $userLoggedIn ? 'display:none' : '' ?>">
+
+        <p id="auth-redirect-msg">
+          <i class="fa-solid fa-lock"></i> Faça login para adicionar ao carrinho
+        </p>
+
+        <!-- ABAS -->
+        <div class="auth-tabs">
+          <button id="tab-login" class="auth-tab active">Entrar</button>
+          <button id="tab-register" class="auth-tab">Cadastrar</button>
+        </div>
+
+        <!-- FORM LOGIN -->
+        <form id="form-login" novalidate>
+          <div id="login-error" class="auth-msg error" style="display:none"></div>
+          <div class="auth-field">
+            <label for="login-email">E-mail</label>
+            <input type="email" id="login-email" placeholder="seu@email.com" autocomplete="email" required>
+          </div>
+          <div class="auth-field">
+            <label for="login-password">Senha</label>
+            <div class="input-wrap">
+              <input type="password" id="login-password" placeholder="Sua senha" autocomplete="current-password" required>
+              <button type="button" class="toggle-pass" data-target="login-password"><i class="fa-solid fa-eye"></i></button>
+            </div>
+          </div>
+          <button type="submit" id="btn-login-submit" class="btn-default btn-auth">
+            <i class="fa-solid fa-right-to-bracket"></i> Entrar
+          </button>
+          <p class="auth-switch">Não tem conta? <a href="#" id="switch-to-register">Cadastre-se</a></p>
+        </form>
+
+        <!-- FORM CADASTRO -->
+        <form id="form-register" novalidate style="display:none">
+          <div id="register-error" class="auth-msg error" style="display:none"></div>
+          <div class="auth-field">
+            <label for="reg-name">Nome completo</label>
+            <input type="text" id="reg-name" placeholder="Seu nome completo" autocomplete="name" required>
+          </div>
+          <div class="auth-field">
+            <label for="reg-email">E-mail</label>
+            <input type="email" id="reg-email" placeholder="seu@email.com" autocomplete="email" required>
+          </div>
+          <div class="auth-field">
+            <label for="reg-phone">Telefone <span class="optional">(opcional)</span></label>
+            <input type="tel" id="reg-phone" placeholder="(81) 99999-9999" autocomplete="tel">
+          </div>
+          <div class="auth-field">
+            <label for="reg-password">Senha</label>
+            <div class="input-wrap">
+              <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" required>
+              <button type="button" class="toggle-pass" data-target="reg-password"><i class="fa-solid fa-eye"></i></button>
+            </div>
+          </div>
+          <div class="auth-field">
+            <label for="reg-confirm">Confirmar senha</label>
+            <div class="input-wrap">
+              <input type="password" id="reg-confirm" placeholder="Repita a senha" autocomplete="new-password" required>
+              <button type="button" class="toggle-pass" data-target="reg-confirm"><i class="fa-solid fa-eye"></i></button>
+            </div>
+          </div>
+          <button type="submit" id="btn-register-submit" class="btn-default btn-auth">
+            <i class="fa-solid fa-user-plus"></i> Criar conta
+          </button>
+          <p class="auth-switch">Já tem conta? <a href="#" id="switch-to-login">Entrar</a></p>
+        </form>
+
+      </div><!-- /auth-view -->
+
+      <div class="auth-divider"></div>
+      <a href="/Pizzaria-1/admin/login.php" class="btn-admin-link">
+        <i class="fa-solid fa-lock"></i> Área Administrativa
+      </a>
+
     </div>
   </div>
 

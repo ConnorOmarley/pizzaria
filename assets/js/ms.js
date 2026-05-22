@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     applyTheme(getIsDark());
 
-    // Atualiza se o usuário mudar o tema do SO (apenas se não houver override salvo)
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         if (!localStorage.getItem('pizzaria-theme')) applyTheme(e.matches);
     });
@@ -118,13 +117,18 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     }
 
-    if (cartToggle)  cartToggle.addEventListener('click', () => openSidebar(cartModal));
-    if (loginToggle) loginToggle.addEventListener('click', () => openSidebar(loginModal));
+    if (cartToggle) cartToggle.addEventListener('click', () => openSidebar(cartModal));
+
+    if (loginToggle) loginToggle.addEventListener('click', () => {
+        // Esconde o aviso de redirecionamento ao abrir manualmente
+        const msg = document.getElementById('auth-redirect-msg');
+        if (msg) msg.style.display = 'none';
+        openSidebar(loginModal);
+    });
 
     document.querySelector('.close-modal')?.addEventListener('click', () => closeSidebar(cartModal));
     document.querySelector('.close-login')?.addEventListener('click', () => closeSidebar(loginModal));
 
-    // Fechar ao clicar no overlay escuro
     cartModal?.addEventListener('click', (e) => {
         if (e.target === cartModal) closeSidebar(cartModal);
     });
@@ -132,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === loginModal) closeSidebar(loginModal);
     });
 
-    // Fechar com ESC
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeSidebar(cartModal);
@@ -143,16 +146,193 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ========================= */
+    /* AUTH — login, cadastro, logout */
+    /* ========================= */
+
+    let pendingPizza = null;
+
+    const authView       = document.getElementById('auth-view');
+    const userLoggedView = document.getElementById('user-logged-view');
+
+    function showLoginTab() {
+        document.getElementById('tab-login')?.classList.add('active');
+        document.getElementById('tab-register')?.classList.remove('active');
+        const fl = document.getElementById('form-login');
+        const fr = document.getElementById('form-register');
+        if (fl) fl.style.display = '';
+        if (fr) fr.style.display = 'none';
+        const err = document.getElementById('login-error');
+        if (err) err.style.display = 'none';
+    }
+
+    function showRegisterTab() {
+        document.getElementById('tab-register')?.classList.add('active');
+        document.getElementById('tab-login')?.classList.remove('active');
+        const fl = document.getElementById('form-login');
+        const fr = document.getElementById('form-register');
+        if (fr) fr.style.display = '';
+        if (fl) fl.style.display = 'none';
+        const err = document.getElementById('register-error');
+        if (err) err.style.display = 'none';
+    }
+
+    document.getElementById('tab-login')?.addEventListener('click', showLoginTab);
+    document.getElementById('tab-register')?.addEventListener('click', showRegisterTab);
+    document.getElementById('switch-to-register')?.addEventListener('click', (e) => { e.preventDefault(); showRegisterTab(); });
+    document.getElementById('switch-to-login')?.addEventListener('click', (e) => { e.preventDefault(); showLoginTab(); });
+
+    // Mostrar/esconder senha
+    document.querySelectorAll('.toggle-pass').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const input = document.getElementById(btn.dataset.target);
+            if (!input) return;
+            const show = input.type === 'password';
+            input.type = show ? 'text' : 'password';
+            btn.querySelector('i').className = show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+        });
+    });
+
+    function showAuthError(elId, msg) {
+        const el = document.getElementById(elId);
+        if (el) { el.textContent = msg; el.style.display = 'block'; }
+    }
+
+    function onLoginSuccess(user) {
+        window.USER = { logged_in: true, name: user.name, email: user.email };
+
+        // Atualiza view logado
+        const nameEl  = document.getElementById('user-display-name');
+        const emailEl = document.getElementById('user-display-email');
+        if (nameEl)  nameEl.textContent  = user.name;
+        if (emailEl) emailEl.textContent = user.email;
+
+        if (authView)       authView.style.display       = 'none';
+        if (userLoggedView) userLoggedView.style.display = 'block';
+
+        // Marca o botão do navbar
+        document.getElementById('login-toggle')?.classList.add('logged-in');
+
+        // Fecha sidebar e abre o modal da pizza pendente
+        setTimeout(() => {
+            closeSidebar(loginModal);
+            if (pendingPizza) {
+                const pp = pendingPizza;
+                pendingPizza = null;
+                openProductModal(pp);
+            }
+        }, 400);
+    }
+
+    // FORMULÁRIO DE LOGIN
+    document.getElementById('form-login')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email    = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        const btn      = document.getElementById('btn-login-submit');
+
+        document.getElementById('login-error').style.display = 'none';
+
+        if (!email || !password) {
+            showAuthError('login-error', 'Preencha e-mail e senha.');
+            return;
+        }
+
+        btn.disabled = true;
+        btn.style.opacity = '.7';
+
+        try {
+            const fd = new FormData();
+            fd.append('action', 'login');
+            fd.append('email', email);
+            fd.append('password', password);
+
+            const res  = await fetch('/Pizzaria-1/auth/api.php', { method: 'POST', body: fd });
+            const data = await res.json();
+
+            if (data.success) {
+                onLoginSuccess(data.user);
+            } else {
+                showAuthError('login-error', data.error || 'Erro ao fazer login.');
+            }
+        } catch {
+            showAuthError('login-error', 'Erro de conexão. Tente novamente.');
+        } finally {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        }
+    });
+
+    // FORMULÁRIO DE CADASTRO
+    document.getElementById('form-register')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name     = document.getElementById('reg-name').value.trim();
+        const email    = document.getElementById('reg-email').value.trim();
+        const phone    = document.getElementById('reg-phone').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const confirm  = document.getElementById('reg-confirm').value;
+        const btn      = document.getElementById('btn-register-submit');
+
+        document.getElementById('register-error').style.display = 'none';
+
+        if (!name || !email || !password) {
+            showAuthError('register-error', 'Preencha todos os campos obrigatórios.');
+            return;
+        }
+        if (password !== confirm) {
+            showAuthError('register-error', 'As senhas não coincidem.');
+            return;
+        }
+        if (password.length < 6) {
+            showAuthError('register-error', 'A senha deve ter pelo menos 6 caracteres.');
+            return;
+        }
+
+        btn.disabled = true;
+        btn.style.opacity = '.7';
+
+        try {
+            const fd = new FormData();
+            fd.append('action', 'register');
+            fd.append('name', name);
+            fd.append('email', email);
+            fd.append('phone', phone);
+            fd.append('password', password);
+
+            const res  = await fetch('/Pizzaria-1/auth/api.php', { method: 'POST', body: fd });
+            const data = await res.json();
+
+            if (data.success) {
+                onLoginSuccess(data.user);
+            } else {
+                showAuthError('register-error', data.error || 'Erro ao cadastrar.');
+            }
+        } catch {
+            showAuthError('register-error', 'Erro de conexão. Tente novamente.');
+        } finally {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        }
+    });
+
+    // LOGOUT
+    document.getElementById('logout-btn')?.addEventListener('click', async () => {
+        const fd = new FormData();
+        fd.append('action', 'logout');
+        await fetch('/Pizzaria-1/auth/api.php', { method: 'POST', body: fd });
+        window.location.reload();
+    });
+
+    /* ========================= */
     /* MODAL DE CUSTOMIZAÇÃO */
     /* ========================= */
 
-    const productModal          = document.getElementById('product-modal');
-    const modalProductTitle     = document.getElementById('modal-product-title');
-    const modalProductDesc      = document.getElementById('modal-product-description');
-    const removeContainer       = document.getElementById('remove-ingredients-options');
-    const addContainer          = document.getElementById('add-ingredients-options');
-    const modalPriceValue       = document.getElementById('modal-price-value');
-    const addToCartFinalBtn     = document.getElementById('add-to-cart-final-btn');
+    const productModal      = document.getElementById('product-modal');
+    const modalProductTitle = document.getElementById('modal-product-title');
+    const modalProductDesc  = document.getElementById('modal-product-description');
+    const removeContainer   = document.getElementById('remove-ingredients-options');
+    const addContainer      = document.getElementById('add-ingredients-options');
+    const modalPriceValue   = document.getElementById('modal-price-value');
+    const addToCartFinalBtn = document.getElementById('add-to-cart-final-btn');
 
     const extras = [
         { name: 'Borda Recheada de Catupiry', price: 8.00 },
@@ -164,40 +344,61 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPizza = { name: '', basePrice: 0, totalPrice: 0, remove: [], add: [] };
     let carrinho = [];
 
+    function openProductModal(pizza) {
+        currentPizza = {
+            name:      pizza.name,
+            basePrice: pizza.basePrice,
+            totalPrice: pizza.basePrice,
+            remove: [],
+            add: [],
+        };
+
+        if (modalProductTitle) modalProductTitle.innerText = pizza.name;
+        if (modalProductDesc)  modalProductDesc.innerText  = pizza.desc || '';
+
+        const ings = (pizza.ingredients || '').split(',').map(i => i.trim()).filter(Boolean);
+        if (removeContainer) {
+            removeContainer.innerHTML = ings.length
+                ? ings.map(ing => `
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="chk-remove" value="${ing}">
+                        Retirar ${ing}
+                    </label>`).join('')
+                : '<p style="font-size:.9rem;color:#888">Sem ingredientes removíveis.</p>';
+        }
+
+        if (addContainer) {
+            addContainer.innerHTML = extras.map(e => `
+                <label class="checkbox-label">
+                    <input type="checkbox" class="chk-add" value="${e.name}" data-price="${e.price}">
+                    ${e.name} <strong>(+ R$ ${e.price.toFixed(2).replace('.', ',')})</strong>
+                </label>`).join('');
+        }
+
+        calcModalPrice();
+        if (productModal) productModal.classList.add('active');
+    }
+
     document.querySelectorAll('.btn-comprar-pizza').forEach(btn => {
         btn.addEventListener('click', () => {
-            currentPizza = {
-                name:       btn.dataset.name,
-                basePrice:  parseFloat(btn.dataset.price),
-                totalPrice: parseFloat(btn.dataset.price),
-                remove: [],
-                add: [],
+            const pizza = {
+                name:        btn.dataset.name,
+                basePrice:   parseFloat(btn.dataset.price),
+                desc:        btn.dataset.desc,
+                ingredients: btn.dataset.ingredients,
             };
 
-            if (modalProductTitle) modalProductTitle.innerText = currentPizza.name;
-            if (modalProductDesc)  modalProductDesc.innerText  = btn.dataset.desc;
-
-            const ings = (btn.dataset.ingredients || '').split(',').map(i => i.trim()).filter(Boolean);
-            if (removeContainer) {
-                removeContainer.innerHTML = ings.length
-                    ? ings.map(ing => `
-                        <label class="checkbox-label">
-                            <input type="checkbox" class="chk-remove" value="${ing}">
-                            Retirar ${ing}
-                        </label>`).join('')
-                    : '<p style="font-size:.9rem;color:#888">Sem ingredientes removíveis.</p>';
+            // Exige login antes de adicionar ao carrinho
+            if (!window.USER?.logged_in) {
+                pendingPizza = pizza;
+                const msg = document.getElementById('auth-redirect-msg');
+                if (msg) msg.style.display = 'block';
+                showLoginTab();
+                openSidebar(loginModal);
+                return;
             }
 
-            if (addContainer) {
-                addContainer.innerHTML = extras.map(e => `
-                    <label class="checkbox-label">
-                        <input type="checkbox" class="chk-add" value="${e.name}" data-price="${e.price}">
-                        ${e.name} <strong>(+ R$ ${e.price.toFixed(2).replace('.', ',')})</strong>
-                    </label>`).join('');
-            }
-
-            calcModalPrice();
-            if (productModal) productModal.classList.add('active');
+            openProductModal(pizza);
         });
     });
 
