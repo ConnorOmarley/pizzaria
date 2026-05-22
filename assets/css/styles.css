@@ -2,7 +2,10 @@
 @import url('header.css');
 @import url('home.css');
 @import url('menu.css');
+@import url('avaliacoes.css');
 @import url('darkmode.css');
 @import url('animations.css');
 @import url('responsive.css');
-@import url('whatsapp.css')
+@import url('whatsapp.css');
+@import url("sidebar.css");
+@import url("modal.css");

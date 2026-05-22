@@ -1,0 +1,198 @@
+/* ========================= */
+/* MODAL SIDEBAR (CARRINHO E LOGIN DA DIREITA) */
+/* ========================= */
+.modal-sidebar {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: flex-end;
+    /* Alinha o conteúdo na direita */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 99999;
+}
+
+.modal-sidebar.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar-content {
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    background: white;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+
+    /* Efeito de deslizar da direita para esquerda */
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-sidebar.active .sidebar-content {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding-bottom: 15px;
+}
+
+.sidebar-header button,
+.modal-header button {
+    border: none;
+    background: transparent;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #1d1d1d;
+}
+
+/* --- ÁREA DE ITENS DO CARRINHO --- */
+#cart-items {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.cart-empty {
+    text-align: center;
+    color: #777;
+    margin-top: 40px;
+}
+
+.cart-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cart-item-info h5 {
+    font-size: 1rem;
+    color: #1d1d1d;
+}
+
+.cart-item-details {
+    font-size: 0.82rem;
+    color: #666;
+    margin-top: 2px;
+}
+
+.cart-item-price {
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.cart-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 20px;
+    margin-top: auto;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* ========================= */
+/* MODAL CENTRAL (CUSTOMIZAÇÃO DA PIZZA) */
+/* ========================= */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 99999;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    width: 95%;
+    max-width: 500px;
+    background: white;
+    border-radius: 28px;
+    padding: 28px;
+    transform: translateY(30px);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+}
+
+/* Opções de customização */
+.custom-section {
+    margin: 20px 0;
+}
+
+.custom-section h4 {
+    margin-bottom: 10px;
+    color: #1d1d1d;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 5px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    width: 18px;
+    height: 18px;
+    accent-color: #ffb300;
+}
+
+.modal-footer-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.modal-price-preview {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* Formulário de Login dentro da Sidebar */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}

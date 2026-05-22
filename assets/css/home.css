@@ -58,9 +58,6 @@
 
 #botao_telefone{
     text-decoration: none;
-}
-
-#botao_telefone button{
     gap: 8px;
 }
 

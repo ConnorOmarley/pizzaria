@@ -1,0 +1,64 @@
+/* ========================= */
+/* AVALIAÇÕES */
+/* ========================= */
+
+#avalia{
+    padding-top: 120px;
+    padding-bottom: 120px;
+
+    text-align: center;
+}
+
+#avalia h1{
+    font-size: 3rem;
+    margin-bottom: 60px;
+}
+
+.avaliacoes-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.avaliacao-card{
+    width: 320px;
+
+    background: white;
+
+    border-radius: 28px;
+
+    padding: 30px 24px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+
+    transition: 0.3s ease;
+}
+
+.avaliacao-card:hover{
+    transform: translateY(-8px);
+}
+
+.avaliacao-card img{
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    margin-bottom: 18px;
+}
+
+.avaliacao-card h3{
+    margin-bottom: 10px;
+}
+
+.avaliacao-card p{
+    margin-top: 14px;
+
+    color: #666;
+
+    line-height: 1.7;
+}

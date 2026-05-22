@@ -1,418 +1,763 @@
+O bloco de código sumiu da sua tela porque, quando enviei a imagem explicativa na última mensagem, acabei não colocando
+o código gigante junto para não ficar confuso!
+
+Ele está logo abaixo. Pode fazer o processo que te expliquei: copie tudo o que está dentro dessa caixa preta e substitua
+o conteúdo do seu arquivo **home.HTML**:
+
+```html
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/msFavicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <title>Pizzaria Taurus</title>
-  </head>
 
-  <body>
-    <header>
-      <nav id="navbar">
-        <a href="index.html" class="logo">
-          <i class="fas fa-pizza-slice"></i>
-          Pizzaria Taurus
-        </a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Versão estável do Font Awesome (Apenas uma importação) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/msFavicon.png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <title>Pizzaria Taurus</title>
+</head>
 
-        <ul id="nav_list">
-          <li class="nav_item active" data-section="home">
-            <a href="#home">Home</a>
-          </li>
+<body>
 
-          <li class="nav_item" data-section="menu">
-            <a href="#menu">Cardápio</a>
-          </li>
+  <!-- HEADER -->
 
-          <li class="nav_item" data-section="avalia">
-            <a href="#avalia">Avaliações</a>
-          </li>
-        </ul>
+  <header>
 
-        <div id="nav_actions">
-          <button id="theme-toggle">
-            <i class="fa-solid fa-moon"></i>
-          </button>
-        </div>
-      </nav>
-    </header>
-    <main id="content">
-      <section id="home">
-        <div class="blob"></div>
-        <div id="cta">
-          <h1 id="titulo">
-            Noites tranquilas, pizzas incríveis. O <span>SABOR</span> vai até
-            <span>você</span>
-          </h1>
+    <nav id="navbar">
 
-          <p id="description">
-            Na Pizzaria do Fabio, cada pizza é preparada com ingredientes
-            selecionados, massa artesanal e muito sabor. Um ambiente acolhedor e
-            perfeito para reunir amigos e família enquanto aproveita as melhores
-            pizzas da cidade. 🍕
-          </p>
+      <a href="index.html" class="logo">
+        <i class="fas fa-pizza-slice"></i>
+        Pizzaria Taurus
+      </a>
 
-          <div id="cta_buttons">
-            <a href="#" class="btn-default">ver cardápio</a>
-            <a href="tel:+55 81 99770-8693" id="botao_telefone">
-              <button class="btn-default">
-                <i class="fa-solid fa-phone"></i>
-                (81) 99770-8693
-              </button>
-            </a>
-          </div>
+      <ul id="nav_list">
 
-          <div id="botao-redes-sociais">
-            <a href="">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
+        <li class="nav_item active" data-section="home">
+          <a href="#home">Home</a>
+        </li>
 
-            <a
-              href="https://www.instagram.com/fabio_barbosa8p/"
-              target="_blank"
-            >
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-          </div>
-        </div>
-        <div id="fotoseila">
-          <img src="assets/img/pizza.png" alt="Pizza" />
-        </div>
+        <li class="nav_item" data-section="menu">
+          <a href="#menu">Cardápio</a>
+        </li>
 
-        <div class="wave-divider">
-          <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path
-              d="M0,64L80,74.7C160,85,320,107,480,101.3C640,96,800,64,960,58.7C1120,53,1280,75,1360,85.3L1440,96L1440,120L0,120Z"
-            ></path>
-          </svg>
-        </div>
-      </section>
+        <li class="nav_item" data-section="avalia">
+          <a href="#avalia">Avaliações</a>
+        </li>
 
-      <section id="menu">
-        <!-- INICIO CARDAPIO -->
-        <h2>Cardápio</h2>
-        <p>Confira nossas deliciosas pizzas!</p>
+      </ul>
 
-        <div class="slider">
-          <div class="slide active">
-            <img src="assets/img/pizza1.jpg" alt="" />
-          </div>
+      <div id="nav_actions">
 
-          <div class="slide">
-            <img src="assets/img/pizza2.jpg" alt="" />
-          </div>
+        <button id="cart-toggle">
 
-          <div class="slide">
-            <img src="assets/img/pizza3.jpg" alt="" />
-          </div>
+          <i class="fa-solid fa-cart-shopping"></i>
 
-          <div class="dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
-        </div>
+          <span id="cart-count">
+            0
+          </span>
 
-        <h1 class="titulo-doces">
-        Pizzas <span>Doces</span>
+        </button>
+
+        <button id="login-toggle">
+          <i class="fa-solid fa-user"></i>
+        </button>
+
+        <button id="theme-toggle">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+  <!-- MAIN -->
+
+  <main id="content">
+
+    <!-- HOME -->
+
+    <section id="home">
+
+      <div class="blob"></div>
+
+      <div id="cta">
+
+        <h1 id="titulo">
+          Noites tranquilas, pizzas incríveis.
+          O <span>SABOR</span> vai até <span>você</span>
         </h1>
 
-        <div id="pratos-doces">
-          <div class="prato">
-            <div id="coração">
-              <i class="fa-solid fa-heart"></i>
-            </div>
+        <p id="description">
+          Na Pizzaria Taurus, cada pizza é preparada com ingredientes
+          selecionados, massa artesanal e muito sabor.
+          Um ambiente acolhedor e perfeito para reunir amigos e família
+          enquanto aproveita as melhores pizzas da cidade. 🍕
+        </p>
 
-            <span class="promo">-30%</span>
+        <div id="cta_buttons">
 
-            <img src="assets/img/p1.jpg" alt="" />
+          <a href="#menu" class="btn-default">
+            Ver Cardápio
+          </a>
 
-            <h3 class="titulo-prato">Pizza de Chocolate com Morango</h3>
+          <a href="tel:+5581997708693" id="botao_telefone" class="btn-default">
 
-            <span id="descricao-prato">
-              Uma deliciosa combinação de chocolate derretido e morangos
-              frescos, perfeita para os amantes de doces.
-            </span>
+            <i class="fa-solid fa-phone"></i>
+            (81) 99770-8693
 
-            <div class="prato-estrela">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <span>(100+)</span>
-            </div>
+          </a>
 
-            <div class="preco-prato">
-              R$ 37,90 <span>R$ 59,90</span>
-              <button class="btn-default">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Comprar
-              </button>
-            </div>
-          </div>
-          <div class="prato">
-            <div id="coração">
-              <i class="fa-solid fa-heart"></i>
-            </div>
-
-            <span class="promo">-30%</span>
-
-            <img src="assets/img/p2.jpg" alt="" />
-
-            <h3 class="titulo-prato">Pizza de Banana com Nutella</h3>
-
-            <span id="descricao-prato">
-              Uma deliciosa combinação de banana e nutella, perfeita para os
-              amantes de doces.
-            </span>
-
-            <div class="prato-estrela">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <span>(100+)</span>
-            </div>
-
-            <div class="preco-prato">
-              R$ 49,90 <span>R$ 69,90</span>
-              <button class="btn-default">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Comprar
-              </button>
-            </div>
-          </div>
-          <div class="prato">
-            <div id="coração">
-              <i class="fa-solid fa-heart"></i>
-            </div>
-
-            <span class="promo">-30%</span>
-
-            <img src="assets/img/p3.jpg" alt="" />
-
-            <h3 class="titulo-prato">Chocolate com Biscoito picado</h3>
-
-            <span id="descricao-prato">
-              Uma deliciosa combinação de chocolate e biscoito picado, perfeita
-              para os amantes de doces.
-            </span>
-
-            <div class="prato-estrela">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <span>(50+)</span>
-            </div>
-
-            <div class="preco-prato">
-              R$ 29,90 <span>R$ 44,90</span>
-              <button class="btn-default">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Comprar
-              </button>
-            </div>
-          </div>
-          <div class="prato">
-            <div id="coração">
-              <i class="fa-solid fa-heart"></i>
-            </div>
-
-            <span class="promo">-30%</span>
-
-            <img src="assets/img/p4.jpg" alt="" />
-
-            <h3 class="titulo-prato">Pizza de Banana com Doce de Leite</h3>
-
-            <span id="descricao-prato">
-              Uma deliciosa combinação de banana e doce de leite, perfeita para
-              os amantes de doces.
-            </span>
-
-            <div class="prato-estrela">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <span>(90+)</span>
-            </div>
-
-            <div class="preco-prato">
-              R$ 49,90 <span>R$ 74,90</span>
-              <button class="btn-default">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Comprar
-              </button>
-            </div>
-        </div>
         </div>
 
-        <div id="pratos-salgados">
+        <div id="botao-redes-sociais">
 
-          <h1 class="titulo-salgadas">
-          Pizzas <span>Salgadas</span>
-          </h1>
+          <a href="#">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
 
-          <div class="prato">
-            <div id="coração">
-              <i class="fa-solid fa-heart"></i>
-            </div>
+          <a href="https://www.instagram.com/fabio_barbosa8p/" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
 
-            <span class="promo">-30%</span>
+        </div>
 
-            <img src="assets/img/p5.jpg" alt="" />
+      </div>
 
-            <h3 class="titulo-prato">Pizza de Marguerita</h3>
+      <div id="fotoseila">
+        <img src="assets/img/pizza.png" alt="Pizza" />
+      </div>
 
-            <span id="descricao-prato">
-              Uma clássica combinação de molho de tomate artesanal, queijo muçarela derretido, tomate fresco e folhas de manjericão, trazendo um sabor leve e irresistível.
-            </span>
+      <div class="wave-divider">
 
-            <div class="prato-estrela">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <span>(60+)</span>
-            </div>
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
 
-            <div class="preco-prato">
-              R$ 49,90 <span>R$ 69,90</span>
-              <button class="btn-default">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Comprar
-              </button>
-            </div>
-          </div>
-          
-                    <div class="prato">
-            <div id="coração">
-              <i class="fa-solid fa-heart"></i>
-            </div>
+          <path
+            d="M0,64L80,74.7C160,85,320,107,480,101.3C640,96,800,64,960,58.7C1120,53,1280,75,1360,85.3L1440,96L1440,120L0,120Z">
+          </path>
 
-            <span class="promo">-30%</span>
+        </svg>
 
-            <img src="assets/img/p6.jpg" alt="" />
+      </div>
 
-            <h3 class="titulo-prato">Pizza de Calabresa</h3>
+    </section>
 
-            <span id="descricao-prato">
-              Uma deliciosa combinação de calabresa fatiada, queijo muçarela derretido, cebola fresca e molho especial, perfeita para quem ama sabores intensos.
-            </span>
+    <!-- MENU -->
 
-            <div class="prato-estrela">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <span>(60+)</span>
-            </div>
+    <section id="menu">
 
-            <div class="preco-prato">
-              R$ 49,90 <span>R$ 69,90</span>
-              <button class="btn-default">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Comprar
-              </button>
-            </div>
-          </div>
+      <h2>Cardápio</h2>
 
-            <div class="prato">
-            <div id="coração">
-              <i class="fa-solid fa-heart"></i>
-            </div>
+      <p>Confira nossas deliciosas pizzas!</p>
 
-            <span class="promo">-30%</span>
+      <!-- SLIDER -->
 
-            <img src="assets/img/p7.jpg" alt="" />
+      <div class="slider">
 
-            <h3 class="titulo-prato">Pizza de Frango com Catupiry</h3>
+        <div class="slide active">
+          <img src="assets/img/pizza1.jpg" alt="">
+        </div>
 
-            <span id="descricao-prato">
-              Uma combinação irresistível de frango desfiado temperado, Catupiry cremoso, queijo muçarela e molho especial, perfeita para qualquer ocasião.
-            </span>
+        <div class="slide">
+          <img src="assets/img/pizza2.jpg" alt="">
+        </div>
 
-            <div class="prato-estrela">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <span>(200+)</span>
-            </div>
+        <div class="slide">
+          <img src="assets/img/pizza3.jpg" alt="">
+        </div>
 
-            <div class="preco-prato">
-              R$ 42,90 <span>R$ 64,90</span>
-              <button class="btn-default">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Comprar
-              </button>
-            </div>
+        <div class="dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+
+      </div>
+
+      <!-- DOCES -->
+
+      <h1 class="titulo-doces">
+        Pizzas <span>Doces</span>
+      </h1>
+
+      <div id="pratos-doces">
+
+        <!-- CARD 1 -->
+
+        <div class="prato">
+
+          <div class="coracao">
+            <i class="fa-solid fa-heart"></i>
           </div>
 
-                    <div class="prato">
-            <div id="coração">
-              <i class="fa-solid fa-heart"></i>
+          <span class="promo">-30%</span>
+
+          <img src="assets/img/p1.jpg" alt="">
+
+          <h3 class="titulo-prato">
+            Pizza de Chocolate com Morango
+          </h3>
+
+          <span class="descricao-prato">
+            Uma deliciosa combinação de chocolate derretido e morangos
+            frescos, perfeita para os amantes de doces.
+          </span>
+
+          <div class="prato-estrela">
+
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+
+            <span>(100+)</span>
+
+          </div>
+
+          <div class="preco-prato">
+
+            <div>
+              R$ 37,90
+              <span>R$ 59,90</span>
             </div>
 
-            <span class="promo">-30%</span>
+            <button class="btn-default btn-comprar-pizza" data-name="Pizza de Chocolate com Morango" data-price="37.90"
+              data-desc="Uma deliciosa combinação de chocolate derretido e morangos frescos, perfeita para os amantes de doces."
+              data-ingredients="Chocolate, Morangos frescos">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Comprar
+            </button>
 
-            <img src="assets/img/p8.jpg" alt="" />
-
-            <h3 class="titulo-prato">Pizza de Stroganoff</h3>
-
-            <span id="descricao-prato">
-                Uma saborosa combinação de strogonoff cremoso, queijo muçarela derretido, batata palha crocante e molho especial, perfeita para os amantes de sabores intensos.
-            </span>
-
-            <div class="prato-estrela">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <span>(150+)</span>
-            </div>
-
-            <div class="preco-prato">
-              R$ 46,90 <span>R$ 69,90</span>
-              <button class="btn-default">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Comprar
-              </button>
-            </div>
           </div>
 
         </div>
-      </section>
-      <!-- FIM CARDAPIO -->
-    </main>
 
+        <!-- CARD 2 -->
 
-    <a
-    href="https://wa.me/5581971152754"
-    class="whatsapp-float"
-    target="_blank"
-    >
+        <div class="prato">
+
+          <div class="coracao">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <span class="promo">-30%</span>
+
+          <img src="assets/img/p2.jpg" alt="">
+
+          <h3 class="titulo-prato">
+            Pizza de Banana com Nutella
+          </h3>
+
+          <span class="descricao-prato">
+            Uma deliciosa combinação de banana e nutella,
+            perfeita para os amantes de doces.
+          </span>
+
+          <div class="prato-estrela">
+
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+
+            <span>(100+)</span>
+
+          </div>
+
+          <div class="preco-prato">
+
+            <div>
+              R$ 49,90
+              <span>R$ 69,90</span>
+            </div>
+
+            <button class="btn-default btn-comprar-pizza" data-name="Pizza de Banana com Nutella" data-price="49.90"
+              data-desc="Uma deliciosa combinação de banana e nutella, perfeita para os amantes de doces."
+              data-ingredients="Banana, Nutella">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Comprar
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 3 -->
+
+        <div class="prato">
+
+          <div class="coracao">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <span class="promo">-30%</span>
+
+          <img src="assets/img/p3.jpg" alt="">
+
+          <h3 class="titulo-prato">
+            Chocolate com Biscoito picado
+          </h3>
+
+          <span class="descricao-prato">
+            Uma deliciosa combinação de chocolate e biscoito picado,
+            perfeita para os amantes de doces.
+          </span>
+
+          <div class="prato-estrela">
+
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+
+            <span>(50+)</span>
+
+          </div>
+
+          <div class="preco-prato">
+
+            <div>
+              R$ 29,90
+              <span>R$ 44,90</span>
+            </div>
+
+            <button class="btn-default btn-comprar-pizza" data-name="Chocolate com Biscoito picado" data-price="29.90"
+              data-desc="Uma deliciosa combinação de chocolate e biscoito picado, perfeita para os amantes de doces."
+              data-ingredients="Chocolate, Biscoito picado">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Comprar
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 4 -->
+
+        <div class="prato">
+
+          <div class="coracao">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <span class="promo">-30%</span>
+
+          <img src="assets/img/p4.jpg" alt="">
+
+          <h3 class="titulo-prato">
+            Pizza de Banana com Doce de Leite
+          </h3>
+
+          <span class="descricao-prato">
+            Uma deliciosa combinação de banana e doce de leite,
+            perfeita para os amantes de doces.
+          </span>
+
+          <div class="prato-estrela">
+
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+
+            <span>(90+)</span>
+
+          </div>
+
+          <div class="preco-prato">
+
+            <div>
+              R$ 49,90
+              <span>R$ 74,90</span>
+            </div>
+
+            <button class="btn-default btn-comprar-pizza" data-name="Pizza de Banana com Doce de Leite"
+              data-price="49.90"
+              data-desc="Uma deliciosa combinação de banana e doce de leite, perfeita para os amantes de doces."
+              data-ingredients="Banana, Doce de leite">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Comprar
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- SALGADAS -->
+
+      <h1 class="titulo-salgadas">
+        Pizzas <span>Salgadas</span>
+      </h1>
+
+      <div id="pratos-salgados">
+
+        <!-- CARD 1 -->
+
+        <div class="prato">
+
+          <div class="coracao">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <span class="promo">-30%</span>
+
+          <img src="assets/img/p5.jpg" alt="">
+
+          <h3 class="titulo-prato">
+            Pizza de Marguerita
+          </h3>
+
+          <span class="descricao-prato">
+            Uma clássica combinação de molho de tomate artesanal,
+            queijo muçarela derretido, tomate fresco e folhas
+            de manjericão.
+          </span>
+
+          <div class="prato-estrela">
+
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+
+            <span>(60+)</span>
+
+          </div>
+
+          <div class="preco-prato">
+
+            <div>
+              R$ 49,90
+              <span>R$ 69,90</span>
+            </div>
+
+            <button class="btn-default btn-comprar-pizza" data-name="Pizza de Marguerita" data-price="49.90"
+              data-desc="Uma clássica combinação de molho de tomate artesanal, queijo muçarela derretido, tomate fresco e folhas de manjericão."
+              data-ingredients="Molho de tomate, Queijo muçarela, Tomate fresco, Manjericão">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Comprar
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 2 -->
+
+        <div class="prato">
+
+          <div class="coracao">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <span class="promo">-30%</span>
+
+          <img src="assets/img/p6.jpg" alt="">
+
+          <h3 class="titulo-prato">
+            Pizza de Calabresa
+          </h3>
+
+          <span class="descricao-prato">
+            Uma deliciosa combinação de calabresa fatiada,
+            queijo muçarela derretido e cebola fresca.
+          </span>
+
+          <div class="prato-estrela">
+
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+
+            <span>(60+)</span>
+
+          </div>
+
+          <div class="preco-prato">
+
+            <div>
+              R$ 49,90
+              <span>R$ 69,90</span>
+            </div>
+
+            <button class="btn-default btn-comprar-pizza" data-name="Pizza de Calabresa" data-price="49.90"
+              data-desc="Uma deliciosa combinação de calabresa fatiada, queijo muçarela derretido e cebola fresca."
+              data-ingredients="Calabresa fatiada, Queijo muçarela, Cebola fresca">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Comprar
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 3 -->
+
+        <div class="prato">
+
+          <div class="coracao">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <span class="promo">-30%</span>
+
+          <img src="assets/img/p7.jpg" alt="">
+
+          <h3 class="titulo-prato">
+            Pizza de Frango com Catupiry
+          </h3>
+
+          <span class="descricao-prato">
+            Uma combinação irresistível de frango desfiado,
+            Catupiry cremoso e queijo muçarela.
+          </span>
+
+          <div class="prato-estrela">
+
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+
+            <span>(200+)</span>
+
+          </div>
+
+          <div class="preco-prato">
+
+            <div>
+              R$ 42,90
+              <span>R$ 64,90</span>
+            </div>
+
+            <button class="btn-default btn-comprar-pizza" data-name="Pizza de Frango com Catupiry" data-price="42.90"
+              data-desc="Uma combinação irresistível de frango desfiado, Catupiry cremoso e queijo muçarela."
+              data-ingredients="Frango desfiado, Catupiry cremoso, Queijo muçarela">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Comprar
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- CARD 4 -->
+
+        <div class="prato">
+
+          <div class="coracao">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+
+          <span class="promo">-30%</span>
+
+          <img src="assets/img/p8.jpg" alt="">
+
+          <h3 class="titulo-prato">
+            Pizza de Stroganoff
+          </h3>
+
+          <span class="descricao-prato">
+            Uma saborosa combinação de strogonoff cremoso,
+            queijo muçarela derretido e batata palha crocante.
+          </span>
+
+          <div class="prato-estrela">
+
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+
+            <span>(150+)</span>
+
+          </div>
+
+          <div class="preco-prato">
+
+            <div>
+              R$ 46,90
+              <span>R$ 69,90</span>
+            </div>
+
+            <button class="btn-default btn-comprar-pizza" data-name="Pizza de Stroganoff" data-price="46.90"
+              data-desc="Uma saborosa combinação de strogonoff cremoso, queijo muçarela derretido e batata palha crocante."
+              data-ingredients="Strogonoff cremoso, Queijo muçarela, Batata palha">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Comprar
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- AVALIAÇÕES -->
+
+    <section id="avalia">
+
+      <h1>Avaliações</h1>
+
+      <div class="avaliacoes-container">
+
+        <div class="avaliacao-card">
+
+          <img src="assets/img/user1.jpg" alt="">
+
+          <h3>Marcos Silva</h3>
+
+          <div class="prato-estrela">
+            ★★★★★
+          </div>
+
+          <p>
+            Melhor pizza da cidade, massa perfeita e entrega rápida.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- WHATSAPP -->
+
+  <a href="https://wa.me/5581971152754" class="whatsapp-float" target="_blank">
     <i class="fa-brands fa-whatsapp"></i>
-    </a>
+  </a>
 
-<script src="assets/js/ms.js"></script>
+  <!-- ARQUIVO LOGICO SCRIPT -->
+  <script src="assets/js/ms.js"></script>
+
+
+  <!-- CARRINHO (SIDEBAR DIREITA) -->
+
+  <div id="cart-modal" class="modal-sidebar">
+
+    <div class="sidebar-content">
+
+      <div class="sidebar-header">
+
+        <h2>Seu Carrinho</h2>
+
+        <button class="close-modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+      </div>
+
+      <div id="cart-items">
+        <p class="cart-empty">
+          Seu carrinho está vazio 🍕
+        </p>
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-total">
+          Total: <span id="cart-total-value">R$ 0,00</span>
+        </div>
+        <button class="btn-default finalizar-btn">
+          Finalizar Pedido
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- LOGIN (SIDEBAR DIREITA) -->
+
+  <div id="login-modal" class="modal-sidebar">
+
+    <div class="sidebar-content">
+
+      <div class="sidebar-header">
+
+        <h2>Entrar</h2>
+
+        <button class="close-login">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+      </div>
+
+      <form class="login-form">
+
+        <input type="email" placeholder="Seu email" required>
+
+        <input type="password" placeholder="Sua senha" required>
+
+        <button class="btn-default">
+          Entrar
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <!-- MODAL DE CUSTOMIZAÇÃO DO PRODUTO (CENTRALIZADO) -->
+
+  <div id="product-modal" class="modal">
+
+    <div class="modal-content product-detail-content">
+
+      <div class="modal-header">
+        <h2 id="modal-product-title">Nome da Pizza</h2>
+        <button class="close-product">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p id="modal-product-description" class="descricao-prato"></p>
+
+      <div class="custom-section">
+        <h4>Retirar ingredientes (Sem custo):</h4>
+        <div id="remove-ingredients-options">
+          <!-- Gerado via JS -->
+        </div>
+      </div>
+
+      <div class="custom-section">
+        <h4>Adicionar extras:</h4>
+        <div id="add-ingredients-options">
+          <!-- Gerado via JS -->
+        </div>
+      </div>
+
+      <div class="modal-footer-action">
+        <div class="modal-price-preview">
+          Preço: <span id="modal-price-value">R$ 0,00</span>
+        </div>
+        <button id="add-to-cart-final-btn" class="btn-default">
+          Adicionar ao Carrinho
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
 </body>
+
 </html>
+
+```

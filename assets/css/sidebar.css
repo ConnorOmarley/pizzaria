@@ -1,0 +1,28 @@
+/* ========================= */
+/* CART CONTROLS */
+/* ========================= */
+
+.cart-controls{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.cart-controls button{
+    width: 28px;
+    height: 28px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #ffb300;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.cart-controls span{
+    font-weight: bold;
+}
