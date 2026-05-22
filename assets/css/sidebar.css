@@ -1,28 +1,30 @@
-/* ========================= */
-/* CART CONTROLS */
-/* ========================= */
+/* cart-controls — estilos base (sobrescritos por modal.css) */
 
-.cart-controls{
+.cart-controls {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-top: 10px;
 }
 
-.cart-controls button{
+.cart-controls button {
     width: 28px;
     height: 28px;
-
     border: none;
     border-radius: 50%;
-
-    background: #ffb300;
-
+    background: var(--surface2, #1a1a2a);
+    color: var(--text, #e8e8f0);
     font-weight: bold;
-
     cursor: pointer;
+    transition: background .2s;
 }
 
-.cart-controls span{
+.cart-controls button:hover {
+    background: var(--accent, #ffb300);
+    color: #1a1a1a;
+}
+
+.cart-controls span {
     font-weight: bold;
+    color: var(--text, #e8e8f0);
 }

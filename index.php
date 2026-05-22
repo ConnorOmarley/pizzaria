@@ -35,23 +35,24 @@ function renderStars(float $rating): string {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="shortcut icon" type="image/x-icon" href="assets/img/msFavicon.png" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="stylesheet" href="assets/css/auth.css" />
-  <link rel="stylesheet" href="assets/css/payment.css" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=3" />
+  <link rel="stylesheet" href="assets/css/auth.css?v=3" />
+  <link rel="stylesheet" href="assets/css/payment.css?v=3" />
   <title>Pizzaria Taurus</title>
   <style>
     body { font-family: 'Poppins', sans-serif; }
   </style>
-  <!-- Detecta dark mode antes de renderizar para evitar flash -->
+  <!-- Dark é padrão — aplica light antes de renderizar se necessário -->
   <script>
     (function () {
       try {
-        var t = localStorage.getItem('pizzaria-theme');
-        var os = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (t === 'dark' || (t === null && os)) {
-          document.documentElement.style.background = '#121212';
+        if (localStorage.getItem('pizzaria-theme') === 'light') {
+          document.documentElement.classList.add('light-pre');
+          document.documentElement.style.background = '#fff8eb';
+        } else {
+          document.documentElement.style.background = '#0b0b12';
         }
       } catch (e) {}
     })();
@@ -99,18 +100,22 @@ function renderStars(float $rating): string {
     <section id="home">
       <div class="blob"></div>
       <div id="cta">
+        <div class="hero-badge">
+          <i class="fa-solid fa-fire"></i> Melhor pizza da cidade
+        </div>
         <h1 id="titulo">
-          Noites tranquilas, pizzas incríveis.
-          O <span>SABOR</span> vai até <span>você</span>
+          Noites incríveis,<br>
+          pizzas <span>inesquecíveis</span>
         </h1>
         <p id="description">
-          Na Pizzaria Taurus, cada pizza é preparada com ingredientes
-          selecionados, massa artesanal e muito sabor.
-          Um ambiente acolhedor e perfeito para reunir amigos e família
-          enquanto aproveita as melhores pizzas da cidade. 🍕
+          Massa artesanal, ingredientes selecionados e muito sabor.
+          Na Pizzaria Taurus, cada pedido é feito com cuidado — e entregue
+          direto na sua porta. 🍕
         </p>
         <div id="cta_buttons">
-          <a href="#menu" class="btn-default">Ver Cardápio</a>
+          <a href="#menu" class="btn-default">
+            <i class="fa-solid fa-pizza-slice"></i> Ver Cardápio
+          </a>
           <a href="tel:+5581997708693" id="botao_telefone" class="btn-default">
             <i class="fa-solid fa-phone"></i>
             (81) 99770-8693
@@ -123,6 +128,20 @@ function renderStars(float $rating): string {
           <a href="https://www.instagram.com/fabio_barbosa8p/" target="_blank">
             <i class="fa-brands fa-instagram"></i>
           </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">500<span>+</span></div>
+            <div class="hero-stat-lbl">Clientes</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">4.9<span>★</span></div>
+            <div class="hero-stat-lbl">Avaliação</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">30<span>min</span></div>
+            <div class="hero-stat-lbl">Entrega</div>
+          </div>
         </div>
       </div>
       <div id="fotoseila">
@@ -153,7 +172,7 @@ function renderStars(float $rating): string {
       </div>
 
       <!-- DOCES -->
-      <h1 class="titulo-doces">Pizzas <span>Doces</span></h1>
+      <h1 class="titulo-doces" data-eyebrow="🍫 Sabor adocicado">Pizzas <span>Doces</span></h1>
       <div id="pratos-doces">
         <?php foreach ($doces as $p):
           $img  = htmlspecialchars($p['image'] ?? 'assets/img/p1.jpg');
@@ -167,9 +186,12 @@ function renderStars(float $rating): string {
           $reviews = (int)$p['reviews'];
         ?>
         <div class="prato">
-          <div class="coracao"><i class="fa-solid fa-heart"></i></div>
-          <?php if ($disc > 0): ?><span class="promo">-<?= $disc ?>%</span><?php endif; ?>
-          <img src="<?= $img ?>" alt="<?= $name ?>">
+          <div class="img-wrap">
+            <div class="coracao"><i class="fa-solid fa-heart"></i></div>
+            <?php if ($disc > 0): ?><span class="promo">-<?= $disc ?>%</span><?php endif; ?>
+            <img src="<?= $img ?>" alt="<?= $name ?>">
+            <span class="badge-categoria badge-doce">Doce</span>
+          </div>
           <h3 class="titulo-prato"><?= $name ?></h3>
           <span class="descricao-prato"><?= $desc ?></span>
           <div class="prato-estrela"><?= $stars ?><span>(<?= $reviews ?>+)</span></div>
@@ -191,7 +213,7 @@ function renderStars(float $rating): string {
       </div>
 
       <!-- SALGADAS -->
-      <h1 class="titulo-salgadas">Pizzas <span>Salgadas</span></h1>
+      <h1 class="titulo-salgadas" data-eyebrow="🧀 Sabor clássico">Pizzas <span>Salgadas</span></h1>
       <div id="pratos-salgados">
         <?php foreach ($salgadas as $p):
           $img  = htmlspecialchars($p['image'] ?? 'assets/img/p5.jpg');
@@ -205,9 +227,12 @@ function renderStars(float $rating): string {
           $reviews = (int)$p['reviews'];
         ?>
         <div class="prato">
-          <div class="coracao"><i class="fa-solid fa-heart"></i></div>
-          <?php if ($disc > 0): ?><span class="promo">-<?= $disc ?>%</span><?php endif; ?>
-          <img src="<?= $img ?>" alt="<?= $name ?>">
+          <div class="img-wrap">
+            <div class="coracao"><i class="fa-solid fa-heart"></i></div>
+            <?php if ($disc > 0): ?><span class="promo">-<?= $disc ?>%</span><?php endif; ?>
+            <img src="<?= $img ?>" alt="<?= $name ?>">
+            <span class="badge-categoria badge-salgada">Salgada</span>
+          </div>
           <h3 class="titulo-prato"><?= $name ?></h3>
           <span class="descricao-prato"><?= $desc ?></span>
           <div class="prato-estrela"><?= $stars ?><span>(<?= $reviews ?>+)</span></div>

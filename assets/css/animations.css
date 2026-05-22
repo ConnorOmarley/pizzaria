@@ -1,23 +1,20 @@
 /* ========================= */
-/* ANIMATIONS */
+/* ANIMATIONS                */
 /* ========================= */
 
-@keyframes blobAnim{
-    0%{
-        border-radius: 58% 42% 63% 37% / 41% 44% 56% 59%;
-    }
+@keyframes blobAnim {
+  0%   { border-radius: 58% 42% 63% 37% / 41% 44% 56% 59%; }
+  50%  { border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%; }
+  100% { border-radius: 58% 42% 63% 37% / 41% 44% 56% 59%; }
+}
 
-    50%{
-        border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%;
-    }
-
-    100%{
-        border-radius: 58% 42% 63% 37% / 41% 44% 56% 59%;
-    }
+@keyframes floatPizza {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50%       { transform: translateY(-24px) rotate(1.5deg); }
 }
 
 /* ========================= */
-/* TRANSITIONS */
+/* TRANSITIONS GLOBAIS       */
 /* ========================= */
 
 body,
@@ -28,18 +25,11 @@ header,
 #theme-toggle,
 #botao-redes-sociais a,
 .logo,
-.blob,
-.btn-default{
-    transition:
-    background 0.5s ease,
-    background-color 0.5s ease,
-    color 0.5s ease,
-    border-color 0.5s ease,
-    box-shadow 0.5s ease;
-}
-
-body{
-    transition:
-    background-image 0.6s ease,
-    color 0.5s ease;
+.btn-default {
+  transition:
+    background 0.4s ease,
+    background-color 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 }

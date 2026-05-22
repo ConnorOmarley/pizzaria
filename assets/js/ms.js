@@ -1,30 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ========================= */
-    /* DARK MODE — segue preferência do SO */
+    /* TEMA — dark é padrão; toggle → light */
     /* ========================= */
 
     const themeToggle = document.getElementById('theme-toggle');
 
-    function getIsDark() {
-        const saved = localStorage.getItem('pizzaria-theme');
-        if (saved === 'dark') return true;
-        if (saved === 'light') return false;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-
-    function applyTheme(dark) {
-        document.body.classList.toggle('dark', dark);
+    function applyTheme(isLight) {
+        document.body.classList.toggle('light', isLight);
         const icon = themeToggle ? themeToggle.querySelector('i') : null;
-        if (icon) icon.className = dark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-        document.documentElement.style.background = '';
+        if (icon) icon.className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
     }
 
-    applyTheme(getIsDark());
-
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('pizzaria-theme')) applyTheme(e.matches);
-    });
+    const savedTheme = localStorage.getItem('pizzaria-theme');
+    applyTheme(savedTheme === 'light');
 
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
@@ -32,12 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
             icon.style.transform = 'rotate(180deg) scale(0)';
             icon.style.opacity = '0';
             setTimeout(() => {
-                const isDark = document.body.classList.toggle('dark');
-                localStorage.setItem('pizzaria-theme', isDark ? 'dark' : 'light');
-                icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+                const isLight = document.body.classList.toggle('light');
+                localStorage.setItem('pizzaria-theme', isLight ? 'light' : 'dark');
+                icon.className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
                 icon.style.transition = 'none';
                 icon.style.transform = 'rotate(-180deg) scale(0)';
-                icon.offsetHeight;
+                icon.offsetHeight; // reflow
                 icon.style.transition = 'all 0.3s ease';
                 icon.style.transform = 'rotate(0deg) scale(1)';
                 icon.style.opacity = '1';
@@ -98,6 +87,25 @@ document.addEventListener('DOMContentLoaded', () => {
             item.classList.toggle('active', item.dataset.section === current);
         });
     }, { passive: true });
+
+    /* ========================= */
+    /* CARD ENTRY ANIMATION    */
+    /* ========================= */
+
+    const cards = document.querySelectorAll('.prato');
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        cards.forEach(c => io.observe(c));
+    } else {
+        cards.forEach(c => c.classList.add('visible'));
+    }
 
     /* ========================= */
     /* SIDEBARS — carrinho e login */

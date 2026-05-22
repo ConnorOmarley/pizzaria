@@ -1,286 +1,181 @@
 /* ========================= */
-/* DARK MODE */
+/* LIGHT MODE OVERRIDE       */
+/* (dark é o padrão agora)   */
 /* ========================= */
 
-body.dark{
-    background: #121212;
-    color: white;
+body.light {
+  --bg:       #fff8eb;
+  --surface:  #ffffff;
+  --surface2: #f3f4f6;
+  --surface3: #e5e7eb;
+  --border:   rgba(0,0,0,.07);
+  --text:     #1a1a1a;
+  --muted:    #9ca3af;
+  --muted2:   #555;
+
+  background: var(--bg);
+  color: var(--text);
 }
 
-body.dark #home{
-    background-image:
-    linear-gradient(
-        rgba(0,0,0,0.75),
-        rgba(0,0,0,0.75)
-    ),
+body.light::before {
+  display: none;
+}
+
+body.light header {
+  background: rgba(255,248,235,.85);
+  border-bottom-color: rgba(0,0,0,.06);
+}
+
+body.light .logo {
+  color: #1d1d1d;
+}
+
+body.light .logo i {
+  filter: none;
+}
+
+body.light .nav_item a {
+  color: #555;
+}
+
+body.light #login-toggle {
+  background: white;
+  color: #1d1d1d;
+  border-color: rgba(0,0,0,.1);
+}
+
+body.light #theme-toggle {
+  background: #1d1d1d;
+  color: white;
+  border-color: transparent;
+}
+
+body.light #home {
+  background-image:
+    linear-gradient(rgba(255,248,235,.78), rgba(255,248,235,.78)),
     url('../img/backfundo.jpg');
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
-body.dark #theme-toggle{
-    background: #ffffff;
-    color: #121212;
+body.light #titulo {
+  color: #1a1a1a;
 }
 
-body.dark #titulo{
-    color: white;
+body.light #titulo span {
+  text-shadow: none;
 }
 
-body.dark #description{
-    color: #d1d1d1;
+body.light #description {
+  color: #4e4e4e;
 }
 
-body.dark .nav_item a{
-    color: #f1f1f1;
+body.light #botao-redes-sociais a {
+  background: white;
+  color: #1d1d1d;
+  border-color: rgba(0,0,0,.08);
 }
 
-body.dark #botao-redes-sociais a{
-    background-color: #1e1e1e;
-    color: white;
+body.light #botao-redes-sociais a:hover {
+  background: #fff8eb;
 }
 
-body.dark .blob{
-    background: linear-gradient(
-        135deg,
-        #080808be,
-        #5c3b1eea
-    );
+body.light .blob {
+  background: linear-gradient(135deg, #d4a017, #4a2c12);
 }
 
-body.dark .logo{
-    color: white;
+body.light .wave-divider path {
+  fill: var(--bg);
 }
 
-body.dark header{
-    background: rgba(0,0,0,0.35);
+body.light #menu {
+  background: var(--bg);
 }
 
-body.dark #menu{
-    background:
-    linear-gradient(
-        to bottom,
-        rgba(18,18,18,0),
-        #121212 120px
-    );
+body.light #menu h1 {
+  color: #1d1d1d;
 }
 
-body.dark .wave-divider path{
-    fill: #121212;
+body.light .prato {
+  background: white;
+  border-color: rgba(0,0,0,.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
 }
 
-/* ========================= */
-/* PRATOS DARK MODE */
-/* ========================= */
-
-body.dark .prato{
-    background:#1f1f1f;
-
-    border: 1px solid rgba(255,255,255,0.06);
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.35);
+body.light .prato:hover {
+  border-color: rgba(255,179,0,.25);
+  box-shadow: 0 20px 50px rgba(0,0,0,.12);
 }
 
-body.dark .prato:hover{
-    box-shadow:
-    0 18px 40px rgba(0,0,0,0.45);
+body.light .prato::before {
+  display: none;
 }
 
-body.dark .prato img{
-    filter:
-    brightness(0.95)
-    contrast(1.08)
-    saturate(1);
+body.light .titulo-prato { color: #1d1d1d; }
+body.light .descricao-prato { color: #666; }
+body.light .preco-prato { color: #1d1d1d; }
+body.light .preco-prato span { color: #aaa; }
+
+body.light .coracao {
+  background: rgba(255,255,255,.8);
+  color: #444;
+  border-color: rgba(0,0,0,.07);
 }
 
-body.dark .titulo-prato{
-    color:white;
+body.light #avalia {
+  background: white;
 }
 
-body.dark .descricao-prato{
-    color:#c9c9c9;
+body.light #avalia::before,
+body.light #avalia::after {
+  display: none;
 }
 
-body.dark .prato-estrela span{
-    color:#d6d6d6;
+body.light #avalia h1 { color: #1d1d1d; }
+
+body.light .avaliacao-card {
+  background: white;
+  border-color: rgba(0,0,0,.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
 }
 
-body.dark .preco-prato{
-    color:white;
+body.light .avaliacao-card h3 { color: #1d1d1d; }
+body.light .avaliacao-card p  { color: #666; }
+
+body.light .sidebar-content {
+  background: white;
+  border-left-color: rgba(0,0,0,.06);
 }
 
-body.dark .coracao{
-    background:
-    rgba(255,255,255,0.12);
+body.light .sidebar-header h2      { color: #1d1d1d; }
+body.light .sidebar-header button  { color: #444; }
+body.light .sidebar-header         { border-bottom-color: rgba(0,0,0,.07); }
+body.light .cart-item-row          { border-bottom-color: rgba(0,0,0,.05); }
+body.light .cart-item-info h5      { color: #1d1d1d; }
+body.light .cart-item-details      { color: #666; }
+body.light .cart-item-price        { color: #e9a209; }
+body.light .cart-footer            { border-top-color: rgba(0,0,0,.07); }
+body.light .cart-total             { color: #1d1d1d; }
+body.light .cart-empty             { color: #999; }
 
-    color:white;
-
-    box-shadow:
-    0 5px 15px rgba(0,0,0,0.25);
+body.light .cart-controls button {
+  background: #f3f4f6;
+  color: #1d1d1d;
+  border-color: rgba(0,0,0,.1);
 }
 
-body.dark .coracao:hover{
-    color:#ff4d6d;
+body.light .modal-content {
+  background: white;
+  border-color: rgba(0,0,0,.06);
 }
 
-body.dark .modal-content{
-    background: #1f1f1f;
+body.light .modal-header h2     { color: #1d1d1d; }
+body.light .modal-header button { color: #555; }
+body.light .custom-section h4   { color: #777; border-bottom-color: rgba(0,0,0,.06); }
+body.light .checkbox-label      { color: #333; }
+body.light .modal-footer-action { border-top-color: rgba(0,0,0,.07); }
+body.light .modal-price-preview { color: #1d1d1d; }
 
-    color: white;
-
-    border: 1px solid rgba(255,255,255,0.06);
-}
-
-body.dark .login-form input{
-    background: #121212;
-
-    color: white;
-
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-body.dark .modal-header button{
-    color: white;
-}
-
-/* ========================= */
-/* DARK MODE HEADER BUTTONS */
-/* ========================= */
-
-body.dark #cart-toggle{
-    background: linear-gradient(
-        135deg,
-        #ffb300,
-        #ffcc33
-    );
-
-    color: #1a1a1a;
-}
-
-body.dark #login-toggle{
-    background: #1f1f1f;
-
-    color: white;
-
-    border: 1px solid rgba(255,255,255,0.06);
-}
-
-body.dark #theme-toggle{
-    background: white;
-
-    color: #121212;
-}
-
-/* ========================= */
-/* MODAL DARK MODE */
-/* ========================= */
-
-body.dark .modal-content{
-    background: #1f1f1f;
-
-    color: white;
-
-    border: 1px solid rgba(255,255,255,0.06);
-}
-
-body.dark .login-form input{
-    background: #121212;
-
-    color: white;
-
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-body.dark .modal-header button{
-    color: white;
-}
-
-body.dark .avaliacao-card{
-    background: #1f1f1f;
-
-    color: white;
-
-    border: 1px solid rgba(255,255,255,0.06);
-}
-
-body.dark .avaliacao-card p{
-    color: #cfcfcf;
-}
-
-/* ========================= */
-/* SIDEBARS DARK MODE */
-/* ========================= */
-
-body.dark .sidebar-content {
-    background: #1a1a1a;
-    color: white;
-}
-
-body.dark .sidebar-header {
-    border-bottom-color: rgba(255,255,255,0.06);
-}
-
-body.dark .sidebar-header h2 {
-    color: white;
-}
-
-body.dark .sidebar-header button {
-    color: #d1d1d1;
-}
-
-body.dark .cart-item-row {
-    border-bottom-color: rgba(255,255,255,0.06);
-}
-
-body.dark .cart-item-info h5 {
-    color: white;
-}
-
-body.dark .cart-item-details {
-    color: #aaa;
-}
-
-body.dark .cart-item-price {
-    color: #f1f1f1;
-}
-
-body.dark .cart-footer {
-    border-top-color: rgba(255,255,255,0.06);
-}
-
-body.dark .cart-total {
-    color: white;
-}
-
-body.dark .cart-empty {
-    color: #888;
-}
-
-body.dark #avalia {
-    background: #121212;
-    color: white;
-}
-
-body.dark #avalia h1 {
-    color: white;
-}
-
-body.dark .custom-section h4 {
-    color: #e0e0e0;
-    border-bottom-color: rgba(255,255,255,0.06);
-}
-
-body.dark .checkbox-label {
-    color: #d1d1d1;
-}
-
-body.dark .modal-footer-action {
-    border-top-color: rgba(255,255,255,0.08);
-}
-
-body.dark .modal-price-preview {
-    color: white;
+body.light .login-form input {
+  background: #f9fafb;
+  color: #1d1d1d;
+  border-color: #e5e7eb;
 }

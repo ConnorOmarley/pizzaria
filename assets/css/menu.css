@@ -1,314 +1,368 @@
 /* ========================= */
-/* MENU */
+/* MENU — Dark Premium       */
 /* ========================= */
 
-#menu{
-    position: relative;
-
-    padding-top: 120px;
-    padding-bottom: 80px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    background:
-    linear-gradient(
-        to bottom,
-        rgba(255,248,235,0),
-        #fff8eb 120px
-    );
-
-    scroll-margin-top: 120px;
-    z-index: 2;
+#menu {
+  position: relative;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+  scroll-margin-top: 120px;
+  z-index: 2;
 }
 
-/* ========================= */
-/* SLIDER */
-/* ========================= */
-
-.slider{
-    width: 100%;
-    max-width: 900px;
-    height: 420px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-    border-radius: 24px;
-
-    box-shadow:
-    0 15px 40px rgba(0,0,0,0.15);
-}
-
-.slide{
-    position: absolute;
-    inset: 0;
-
-    opacity: 0;
-
-    transform: scale(1.08);
-
-    filter: blur(8px);
-
-    transition:
-    opacity 1.4s ease,
-    transform 6s ease,
-    filter 1.4s ease;
-}
-
-.slide.active{
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0px);
-    z-index: 2;
-}
-
-.slide img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* Glow lateral esquerdo no menu */
+#menu::before {
+  content: '';
+  position: absolute;
+  left: -150px;
+  top: 30%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,179,0,.06), transparent 65%);
+  pointer-events: none;
 }
 
 /* ========================= */
-/* DOTS */
+/* TÍTULOS DE SEÇÃO          */
 /* ========================= */
 
-.dots{
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-
-    z-index: 10;
+#menu h1 {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 800;
+  margin: 80px 0 50px;
+  width: 100%;
+  color: var(--text);
+  letter-spacing: -.03em;
+  position: relative;
 }
 
-.dot{
-    width: 12px;
-    height: 12px;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,0.6);
-
-    cursor: pointer;
-
-    transition: 0.3s;
+#menu h1::before {
+  content: attr(data-eyebrow);
+  display: block;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .6rem;
+  opacity: .85;
 }
 
-.dot.active{
-    background: white;
-    transform: scale(1.2);
+#menu h1 span {
+  background: linear-gradient(135deg, #ffb300, #ffcc33);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ========================= */
-/* PRATOS */
+/* SLIDER                    */
+/* ========================= */
+
+.slider {
+  width: 100%;
+  max-width: 900px;
+  height: 420px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.55);
+  border: 1px solid var(--border);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.08);
+  filter: blur(8px);
+  transition: opacity 1.4s ease, transform 6s ease, filter 1.4s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+  z-index: 2;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Dots */
+.dots {
+  position: absolute;
+  bottom: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  cursor: pointer;
+  transition: .3s;
+}
+
+.dot.active {
+  background: var(--accent);
+  transform: scale(1.3);
+  box-shadow: 0 0 8px rgba(255,179,0,.6);
+}
+
+/* ========================= */
+/* GRID DE PRATOS            */
 /* ========================= */
 
 #pratos-doces,
-#pratos-salgados{
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-
-    flex-wrap: wrap;
-
-    margin-top: 40px;
-}
-
-#menu h1{
-    text-align: center;
-    font-size: 40px;
-    margin: 80px 0 50px;
-    width: 100%;
-}
-
-#menu h1 span{
-    color: red;
+#pratos-salgados {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 40px;
 }
 
 /* ========================= */
-/* CARD */
+/* CARD DE PIZZA             */
 /* ========================= */
 
-.prato{
-    width:320px;
+.prato {
+  width: 310px;
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px rgba(0,0,0,.35);
+  min-height: 540px;
 
-    background:#ffffff;
-
-    border-radius:28px;
-
-    padding:16px;
-
-    display:flex;
-    flex-direction:column;
-
-    position:relative;
-
-    overflow:hidden;
-
-    transition:0.35s ease;
-
-    border: 1px solid rgba(0,0,0,0.05);
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.08);
-
-    min-height: 560px;
+  /* Entrada animada */
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity .6s ease,
+    transform .6s ease,
+    border-color .3s,
+    box-shadow .3s;
 }
 
-.prato:hover{
-    transform: translateY(-8px);
-
-    box-shadow:
-    0 18px 40px rgba(0,0,0,0.14);
+.prato.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.prato img{
-    width:100%;
-    height:230px;
-
-    object-fit:cover;
-
-    border-radius:22px;
-
-    transition:0.4s ease;
+.prato:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255,179,0,.22);
+  box-shadow: 0 24px 56px rgba(0,0,0,.5), 0 0 0 1px rgba(255,179,0,.1);
 }
 
-.prato:hover img{
-    transform:scale(1.03);
+.prato.visible:hover {
+  transform: translateY(-10px);
 }
 
-.promo{
-    position: absolute;
+/* ========================= */
+/* IMAGEM COM OVERLAY        */
+/* ========================= */
 
-    background: #ff3b30;
-    color: white;
-
-    padding: 6px 10px;
-
-    border-radius: 8px;
-
-    font-size: 12px;
-    font-weight: bold;
-
-    top: 20px;
-    right: 20px;
+.img-wrap {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-.titulo-prato{
-    margin-top:18px;
-
-    font-size:1.5rem;
-    font-weight:700;
-
-    color:#1d1d1d;
-
-    line-height:1.2;
+.img-wrap img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
 }
 
-.descricao-prato{
-    margin-top:10px;
-
-    color:#666;
-
-    line-height:1.6;
-
-    font-size:0.98rem;
-
-    min-height: 70px;
+.prato:hover .img-wrap img {
+  transform: scale(1.06);
 }
 
-.prato-estrela{
-    margin-top:16px;
-
-    display:flex;
-    align-items:center;
-    gap:5px;
-
-    color:gold;
-
-    font-size:1rem;
+/* Gradiente na base da imagem */
+.img-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(19,19,31,.9), transparent);
+  pointer-events: none;
 }
 
-.prato-estrela span{
-    color:#777;
-
-    margin-left:6px;
-
-    font-size:0.95rem;
+/* Badge promo */
+.promo {
+  position: absolute;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  top: 14px;
+  right: 14px;
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(239,68,68,.35);
 }
 
-.preco-prato{
-    margin-top:auto;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    color:#1d1d1d;
-
-    font-size:1.4rem;
-    font-weight:700;
-
-    gap:10px;
+/* Badge categoria */
+.badge-categoria {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .28rem .7rem;
+  border-radius: 6px;
+  z-index: 5;
 }
 
-.preco-prato span{
-    color: red;
-
-    font-size: 1.2rem;
-    font-weight: lighter;
-
-    text-decoration: line-through;
+.badge-doce {
+  background: rgba(251,146,60,.15);
+  border: 1px solid rgba(251,146,60,.3);
+  color: #fb923c;
 }
 
-.preco-prato .btn-default{
-    padding:12px 18px;
-    border-radius:16px;
-    font-size:1rem;
+.badge-salgada {
+  background: rgba(168,85,247,.15);
+  border: 1px solid rgba(168,85,247,.3);
+  color: #a855f7;
 }
 
-.preco-prato .btn-default:hover{
-    transform:scale(1.05);
+/* Coração */
+.coracao {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 38px;
+  height: 38px;
+  background: rgba(13,13,20,.75);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted2);
+  z-index: 10;
+  transition: .3s ease;
+  border: 1px solid var(--border);
+  cursor: pointer;
 }
 
-.coracao{
-    position:absolute;
-
-    top:18px;
-    left:18px;
-
-    width:42px;
-    height:42px;
-
-    background:rgba(255,255,255,0.75);
-
-    backdrop-filter:blur(10px);
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:#444;
-
-    z-index:10;
-
-    transition:0.3s ease;
-
-    box-shadow:
-    0 5px 15px rgba(0,0,0,0.08);
+.coracao:hover {
+  color: #ff4d6d;
+  border-color: rgba(255,77,109,.3);
+  transform: scale(1.12);
 }
 
-.coracao:hover{
-    color:red;
-    transform:scale(1.1);
+/* Textos */
+.titulo-prato {
+  margin-top: 14px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
 }
+
+.descricao-prato {
+  margin-top: 7px;
+  color: var(--muted2);
+  line-height: 1.6;
+  font-size: .87rem;
+  min-height: 60px;
+}
+
+/* Estrelas */
+.prato-estrela {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent);
+  font-size: .88rem;
+}
+
+.prato-estrela span {
+  color: var(--muted);
+  margin-left: 4px;
+  font-size: .82rem;
+}
+
+/* Preço e botão */
+.preco-prato {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text);
+  font-size: 1.3rem;
+  font-weight: 700;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.preco-prato span {
+  color: var(--muted);
+  font-size: .95rem;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+.preco-prato .btn-default {
+  padding: 9px 16px;
+  border-radius: 12px;
+  font-size: .85rem;
+}
+
+/* Light mode */
+body.light #menu { background: var(--bg); }
+body.light #menu::before { display: none; }
+body.light #menu h1 { color: #1d1d1d; }
+body.light #menu h1 span { -webkit-text-fill-color: transparent; }
+
+body.light .prato {
+  background: white;
+  border-color: rgba(0,0,0,.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+body.light .prato:hover {
+  border-color: rgba(255,179,0,.2);
+  box-shadow: 0 20px 50px rgba(0,0,0,.12);
+}
+body.light .img-wrap::after {
+  background: linear-gradient(to top, rgba(255,255,255,.85), transparent);
+}
+body.light .titulo-prato { color: #1d1d1d; }
+body.light .descricao-prato { color: #666; }
+body.light .preco-prato { color: #1d1d1d; border-top-color: rgba(0,0,0,.06); }
+body.light .preco-prato span { color: #aaa; }
+body.light .coracao { background: rgba(255,255,255,.8); color: #444; border-color: rgba(0,0,0,.07); }
+body.light .slider { box-shadow: 0 20px 50px rgba(0,0,0,.15); }
