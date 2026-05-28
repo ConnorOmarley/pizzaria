@@ -52,6 +52,7 @@ switch ($action) {
         $stmt->bind_param('ssss', $name, $email, $hash, $phone);
         if ($stmt->execute()) {
             $userId = $stmt->insert_id;
+            session_regenerate_id(true);
             $_SESSION['user_id']    = $userId;
             $_SESSION['user_name']  = $name;
             $_SESSION['user_email'] = $email;
@@ -83,6 +84,7 @@ switch ($action) {
             exit;
         }
 
+        session_regenerate_id(true);
         $_SESSION['user_id']    = $user['id'];
         $_SESSION['user_name']  = $user['name'];
         $_SESSION['user_email'] = $user['email'];

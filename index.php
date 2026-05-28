@@ -60,7 +60,7 @@ function renderStars(float $rating): string {
       'logged_in' => $userLoggedIn,
       'name'      => $_SESSION['user_name']  ?? '',
       'email'     => $_SESSION['user_email'] ?? '',
-    ]) ?>;
+    ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
   </script>
 </head>
 
@@ -386,10 +386,12 @@ function renderStars(float $rating): string {
 
       </div><!-- /auth-view -->
 
-      <div class="auth-divider"></div>
-      <a href="/Pizzaria-1/admin/login.php" class="btn-admin-link">
-        <i class="fa-solid fa-lock"></i> Área Administrativa
-      </a>
+      <div class="auth-admin-footer">
+        <div class="auth-divider"></div>
+        <a href="/Pizzaria-1/admin/login.php" class="btn-admin-link">
+          <i class="fa-solid fa-lock"></i> Área Administrativa
+        </a>
+      </div>
 
     </div>
   </div>

@@ -1,5 +1,19 @@
 /* ========== AUTH SIDEBAR — Dark Premium ========== */
 
+#auth-view,
+#user-logged-view {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+#auth-view::-webkit-scrollbar,
+#user-logged-view::-webkit-scrollbar { width: 4px; }
+#auth-view::-webkit-scrollbar-track,
+#user-logged-view::-webkit-scrollbar-track { background: transparent; }
+#auth-view::-webkit-scrollbar-thumb,
+#user-logged-view::-webkit-scrollbar-thumb { background: var(--surface3, #2a2a3a); border-radius: 4px; }
+
 /* Tabs */
 .auth-tabs {
     display: flex;
@@ -230,6 +244,11 @@
     background: rgba(239,68,68,.25);
     color: #fff;
     transform: translateY(-1px);
+}
+
+/* Admin footer — always pinned at bottom of sidebar */
+.auth-admin-footer {
+    flex-shrink: 0;
 }
 
 /* Admin link */

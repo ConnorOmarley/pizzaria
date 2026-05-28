@@ -1,3 +1,7 @@
+function esc(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ========================= */
@@ -215,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (emailEl) emailEl.textContent = user.email;
 
         if (authView)       authView.style.display       = 'none';
-        if (userLoggedView) userLoggedView.style.display = 'block';
+        if (userLoggedView) userLoggedView.style.display = '';
 
         // Marca o botão do navbar
         document.getElementById('login-toggle')?.classList.add('logged-in');
@@ -369,8 +373,8 @@ document.addEventListener('DOMContentLoaded', () => {
             removeContainer.innerHTML = ings.length
                 ? ings.map(ing => `
                     <label class="checkbox-label">
-                        <input type="checkbox" class="chk-remove" value="${ing}">
-                        Retirar ${ing}
+                        <input type="checkbox" class="chk-remove" value="${esc(ing)}">
+                        Retirar ${esc(ing)}
                     </label>`).join('')
                 : '<p style="font-size:.9rem;color:#888">Sem ingredientes removíveis.</p>';
         }
@@ -378,8 +382,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (addContainer) {
             addContainer.innerHTML = extras.map(e => `
                 <label class="checkbox-label">
-                    <input type="checkbox" class="chk-add" value="${e.name}" data-price="${e.price}">
-                    ${e.name} <strong>(+ R$ ${e.price.toFixed(2).replace('.', ',')})</strong>
+                    <input type="checkbox" class="chk-add" value="${esc(e.name)}" data-price="${e.price}">
+                    ${esc(e.name)} <strong>(+ R$ ${e.price.toFixed(2).replace('.', ',')})</strong>
                 </label>`).join('');
         }
 
@@ -458,12 +462,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let total = 0;
             list.innerHTML = carrinho.map(item => {
                 total += item.totalPrice;
-                const notasSem  = item.remove.length ? `Sem: ${item.remove.join(', ')}` : '';
-                const notasMais = item.add.length    ? `Mais: ${item.add.join(', ')}` : '';
+                const notasSem  = item.remove.length ? `Sem: ${item.remove.map(esc).join(', ')}` : '';
+                const notasMais = item.add.length    ? `Mais: ${item.add.map(esc).join(', ')}` : '';
                 const nota = [notasSem, notasMais].filter(Boolean).join(' | ') || 'Tradicional';
                 return `<div class="payment-item-row">
                     <div>
-                        <div class="payment-item-name">${item.name}</div>
+                        <div class="payment-item-name">${esc(item.name)}</div>
                         <div class="payment-item-note">${nota}</div>
                     </div>
                     <span class="payment-item-price">R$ ${item.totalPrice.toFixed(2).replace('.', ',')}</span>
@@ -615,13 +619,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let totalAcc = 0;
         container.innerHTML = carrinho.map((item, idx) => {
             totalAcc += item.totalPrice;
-            const notasSem  = item.remove.length ? `<strong>Sem:</strong> ${item.remove.join(', ')}` : '';
-            const notasMais = item.add.length    ? `<strong>Mais:</strong> ${item.add.join(', ')}` : '';
+            const notasSem  = item.remove.length ? `<strong>Sem:</strong> ${item.remove.map(esc).join(', ')}` : '';
+            const notasMais = item.add.length    ? `<strong>Mais:</strong> ${item.add.map(esc).join(', ')}` : '';
             const notas     = [notasSem, notasMais].filter(Boolean).join(' | ') || 'Tradicional';
             return `
             <div class="cart-item-row">
                 <div class="cart-item-info">
-                    <h5>${item.name}</h5>
+                    <h5>${esc(item.name)}</h5>
                     <div class="cart-item-details">${notas}</div>
                 </div>
                 <div style="display:flex;align-items:center;gap:10px">

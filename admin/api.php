@@ -50,7 +50,7 @@ function addPizza() {
     $description  = trim($_POST['description'] ?? '');
     $category     = $_POST['category'] ?? 'salgada';
     $price        = (float)($_POST['price'] ?? 0);
-    $orig_price   = $_POST['original_price'] !== '' ? (float)$_POST['original_price'] : null;
+    $orig_price   = ($_POST['original_price'] ?? '') !== '' ? (float)$_POST['original_price'] : null;
     $discount     = (int)($_POST['discount'] ?? 0);
     $ingredients  = trim($_POST['ingredients'] ?? '');
     $rating       = min(5.0, max(1.0, (float)($_POST['rating'] ?? 5.0)));
@@ -88,8 +88,11 @@ function updatePizza() {
     if (!$id || !$name || $price <= 0) throw new Exception('Dados inválidos.');
 
     // Busca imagem atual
-    $r = $conn->query("SELECT image FROM pizzas WHERE id=$id");
-    $current = $r->fetch_assoc();
+    $r = $conn->prepare("SELECT image FROM pizzas WHERE id=?");
+    $r->bind_param('i', $id);
+    $r->execute();
+    $current = $r->get_result()->fetch_assoc();
+    $r->close();
     if (!$current) throw new Exception('Pizza não encontrada.');
 
     $image = handleImageUpload();
@@ -145,8 +148,11 @@ function togglePizza() {
     $s->execute();
     $s->close();
 
-    $r = $conn->query("SELECT available FROM pizzas WHERE id=$id");
-    $row = $r->fetch_assoc();
+    $r = $conn->prepare("SELECT available FROM pizzas WHERE id=?");
+    $r->bind_param('i', $id);
+    $r->execute();
+    $row = $r->get_result()->fetch_assoc();
+    $r->close();
 
     echo json_encode(['success' => true, 'available' => (bool)$row['available']]);
 }
