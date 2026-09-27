@@ -78,7 +78,9 @@ Duplo clique em **`iniciar-pizzaria.bat`** — servidor sobe em `http://localhos
 | Usuário | `admin` |
 | Senha | `password` |
 
-> ⚠️ Altere a senha do admin antes de usar em produção.
+> ⚠️ **Credencial de demonstração.** O hash bcrypt no dump é o hash público e conhecido da senha `password` (padrão do Laravel). Ele existe só para você conseguir entrar no painel numa instalação limpa. **Troque a senha do admin antes de usar em produção.**
+
+O mesmo vale para a linha `users` do dump, que é um cliente fictício (`cliente@exemplo.com`) — não é o cadastro de ninguém.
 
 ---
 
