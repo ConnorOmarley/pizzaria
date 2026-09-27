@@ -186,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </button>
       </form>
     </div>
-    <a href="/Pizzaria-1/" class="back-link">
+    <a href="./" class="back-link">
       <i class="fa-solid fa-arrow-left"></i> Voltar ao site
     </a>
   </div>

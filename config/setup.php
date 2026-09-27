@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli('localhost', 'root', '');
+$conn = new mysqli('localhost', 'root', '', null, 3307);
 if ($conn->connect_error) die('Conexão falhou: ' . $conn->connect_error);
 
 $conn->query("CREATE DATABASE IF NOT EXISTS pizzaria_taurus CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
@@ -108,8 +108,8 @@ p{color:#6b7280;margin-bottom:1rem}
     <p>Senha: <strong>admin123</strong></p>
   </div>
   <div class="btns">
-    <a class="btn" href="/Pizzaria-1/">🍕 Ver o site</a>
-    <a class="btn" href="/Pizzaria-1/admin/login.php">🔐 Acessar admin</a>
+    <a class="btn" href="./">🍕 Ver o site</a>
+    <a class="btn" href="./admin/login.php">🔐 Acessar admin</a>
   </div>
 </div>
 </body>

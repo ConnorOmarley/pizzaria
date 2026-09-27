@@ -48,7 +48,7 @@ $adminName = htmlspecialchars($_SESSION['admin_username']);
       <a href="kitchen.php" class="nav-item">
         <i class="fa-solid fa-fire-flame-curved"></i> Kitchen Live
       </a>
-      <a href="/Pizzaria-1/" class="nav-item" target="_blank">
+      <a href="./" class="nav-item" target="_blank">
         <i class="fa-solid fa-globe"></i> Ver site
       </a>
     </nav>

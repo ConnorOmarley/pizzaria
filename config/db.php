@@ -4,7 +4,7 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'pizzaria_taurus');
 
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, 3307);
 
 if ($conn->connect_error) {
     $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
@@ -15,7 +15,7 @@ if ($conn->connect_error) {
     }
     die('<div style="font-family:sans-serif;padding:2rem;text-align:center">
          <h2>⚠️ Banco de dados não encontrado</h2>
-         <p>Execute o <a href="/Pizzaria-1/config/setup.php">script de configuração inicial</a> primeiro.</p>
+         <p>Execute o <a href="./config/setup.php">script de configuração inicial</a> primeiro.</p>
          </div>');
 }
 

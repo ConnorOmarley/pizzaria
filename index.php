@@ -388,7 +388,7 @@ function renderStars(float $rating): string {
 
       <div class="auth-admin-footer">
         <div class="auth-divider"></div>
-        <a href="/Pizzaria-1/admin/login.php" class="btn-admin-link">
+        <a href="./admin/login.php" class="btn-admin-link">
           <i class="fa-solid fa-lock"></i> Área Administrativa
         </a>
       </div>
