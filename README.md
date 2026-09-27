@@ -15,7 +15,9 @@ Site web completo de uma pizzaria, com **cardápio online**, carrinho de compras
 
 Projeto feito em parceria com **[@Fabioshit](https://github.com/Fabioshit)**, que iniciou o repositório e participou do desenvolvimento.
 
-O histórico de commits é real e está preservado: os commits dos dois autores aparecem misturados, sem reescrita. Contribuições principais do lado de cá: painel de **contabilidade** com KPIs e gráficos, redesign da interface, **tela de login de usuários** e a documentação completa do projeto (incluindo este README).
+O histórico de commits é real e está preservado: os commits dos dois autores aparecem misturados. Contribuições principais do lado de cá: painel de **contabilidade** com KPIs e gráficos, redesign da interface, **tela de login de usuários** e a documentação completa do projeto (incluindo este README).
+
+> **Nota sobre o histórico.** Este repositório passou por uma reescrita de histórico com `git filter-branch` para remover do dump SQL um cadastro de cliente real (nome, e-mail e hash de senha) e o hash do administrador. A reescrita só alterou o *conteúdo* desses arquivos — **autoria, mensagens e datas foram preservadas**, e os 18 commits continuam sendo dos mesmos autores.
 
 ---
 
