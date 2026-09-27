@@ -11,6 +11,14 @@ Site web completo de uma pizzaria, com **cardápio online**, carrinho de compras
 
 ---
 
+## 👥 Trabalho em equipe
+
+Projeto feito em parceria com **[@Fabioshit](https://github.com/Fabioshit)**, que iniciou o repositório e participou do desenvolvimento.
+
+O histórico de commits é real e está preservado: os commits dos dois autores aparecem misturados, sem reescrita. Contribuições principais do lado de cá: painel de **contabilidade** com KPIs e gráficos, redesign da interface, **tela de login de usuários** e a documentação completa do projeto (incluindo este README).
+
+---
+
 ## ✨ Funcionalidades
 
 ### Loja (área pública)
@@ -111,4 +119,4 @@ Tabelas: `users` (clientes), `admins` (administradores) e `pizzas` (cardápio co
 
 ## 📝 Licença
 
-A combinar.
+MIT — ver [LICENSE](LICENSE).
