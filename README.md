@@ -27,7 +27,7 @@ O histórico de commits é real e está preservado: os commits dos dois autores 
 
 - 🍕 Cardápio com pizzas doces e salgadas, avaliações e carrossel
 - 🛒 Carrinho de compras lateral com customização de pizza (adicionar/remover ingredientes)
-- 💳 Checkout com **PIX**, débito e crédito (com parcelamento)
+- 💳 **Modal de pagamento** com campos de PIX, débito e crédito — **interface apenas, não há integração com gateway**: nada é cobrado e nenhum pagamento é processado
 - 🌙 Tema **dark/light** (preferência salva no navegador)
 - 📱 Botão flutuante do WhatsApp
 
@@ -40,7 +40,7 @@ O histórico de commits é real e está preservado: os commits dos dois autores 
 
 - 🍕 **CRUD completo de pizzas** — listar, adicionar, editar, excluir e alterar disponibilidade + upload de imagens
 - 📊 **Contabilidade** — KPIs e gráficos (Chart.js) de faturamento mensal e vendas por tipo
-- 👨‍🍳 **Kitchen Live** — kanban de pedidos em tempo real (Na Esteira / No Forno / Pronto p/ Entrega) com relógio ao vivo
+- 👨‍🍳 **Kitchen Live** — kanban de pedidos com relógio ao vivo, **simulated no navegador**: `createOrder()` gera os pedidos localmente, sem API nem banco. É demonstração de interface, não fluxo real de cozinha
 
 ---
 
@@ -75,12 +75,14 @@ Duplo clique em **`iniciar-pizzaria.bat`** — servidor sobe em `http://localhos
 
 ### Credenciais do admin
 
-| Campo | Valor |
-| --- | --- |
-| Usuário | `admin` |
-| Senha | `password` |
+Depende de **qual caminho de instalação você usou**:
 
-> ⚠️ **Credencial de demonstração.** O hash bcrypt no dump é o hash público e conhecido da senha `password` (padrão do Laravel). Ele existe só para você conseguir entrar no painel numa instalação limpa. **Troque a senha do admin antes de usar em produção.**
+| Caminho | Usuário | Senha |
+| --- | --- | --- |
+| `config/setup.php` | `admin` | `admin123` |
+| Importar `pizzaria_taurus.sql` | `admin` | `password` |
+
+> ⚠️ **Ambas são credenciais de demonstração.** O hash do dump é o bcrypt público e conhecido da senha `password` (padrão do Laravel); o do `setup.php` é gerado na hora para `admin123`. Existem só para você entrar no painel numa instalação limpa. **Troque a senha do admin antes de usar em produção.**
 
 O mesmo vale para a linha `users` do dump, que é um cliente fictício (`cliente@exemplo.com`) — não é o cadastro de ninguém.
 
@@ -118,6 +120,19 @@ Pizzaria/
 Tabelas: `users` (clientes), `admins` (administradores) e `pizzas` (cardápio com descontos, categoria doce/salgada, avaliações).
 
 > A configuração do banco está em `config/db.php` (o projeto não usa `.env`).
+
+---
+
+## Limites conhecidos
+
+- **A Kitchen Live é uma simulação do navegador.** `assets/js/kitchen.js` cria os pedidos com `createOrder()` e `nextOrderNum()` no cliente; não há `fetch`, `XMLHttpRequest`, WebSocket nem rota de API que ligue o kanban ao banco. Nenhum pedido do carrinho chega nele. O "tempo real" é o relógio (`setInterval` de 1s).
+- **A contabilidade não mede vendas.** Os KPIs e gráficos somam preço, preço original, desconto e avaliação da tabela `pizzas` — ou seja, o catálogo, não o que foi vendido. Como não há pagamento nem pedido, não há como saber o faturamento real.
+- **Não existe pagamento.** O modal de checkout tem os campos de cartão, débito e PIX, mas não há SDK, API nem webhook de gateway: nada é cobrado e nada é gravado.
+- **As duas senhas de demonstração são diferentes.** `setup.php` cria `admin`/`admin123`; o dump traz `admin`/`password`. Ver a tabela em [Credenciais do admin](#credenciais-do-admin).
+- **Não tem um único teste automatizado.** PHP puro sem `composer.json`, sem suíte e sem CI — a validação é manual.
+- **Sem token anti-CSRF.** Não há uma única ocorrência de `csrf` no projeto: os formulários do painel autenticam por sessão e não se protegem contra requisição forjada de outro site.
+- **Gráficos e ícones por CDN.** Chart.js, Font Awesome e Google Fonts vêm de terceiros; sem internet, o painel de contabilidade perde os gráficos.
+- **O `setup.php` não versiona o schema.** Ele é idempotente (`CREATE TABLE IF NOT EXISTS` e seed só se a tabela estiver vazia), mas mudar o schema significa editar o `pizzaria_taurus.sql` e importar de novo — não há migration.
 
 ---
 
